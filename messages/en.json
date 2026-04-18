@@ -1,0 +1,339 @@
+{
+  "landing": {
+    "navigationLinks": [
+      { "href": "#features", "label": "Features" },
+      { "href": "#how", "label": "How it works" },
+      { "href": "/pricing", "label": "Pricing" },
+      { "href": "#faq", "label": "FAQ" }
+    ],
+    "hero": {
+      "titleMain": "Legal AI Assistant",
+      "titleFor": "for:",
+      "titleAudienceRotating": ["lawyers", "accountants", "SME founders"],
+      "description": "DoLegal is an assistant for RA law—research, document drafting, and contract checks tied to official legislation with citations. It’s for solo and firm lawyers, accountants, and founders who carry tax and compliance work. Why now: e-filing, weekly legal updates, and heavier reporting loads—manual search in tabs no longer fits the pace.",
+      "primaryCta": "Join Early Access",
+      "secondaryCta": "See how it works ->",
+      "onlineStatus": "Online",
+      "previewBadge": "Example",
+      "previewQuestionLabel": "Question",
+      "previewAnswerLabel": "Answer",
+      "previewDocumentLabel": "Document",
+      "previewAttachmentLabel": "Context",
+      "previewAttachmentIdle": "Add PDF or Word — we read it alongside your question",
+      "previewDropzoneIdle": "Drop PDF or DOCX to analyze",
+      "previewDropzoneFormats": "PDF · DOCX · up to 10 MB",
+      "previewAnalyzing": "Analyzing…",
+      "previewAnalyzeDetail": "Checking clauses against RA law",
+      "previewAnalyzedFile": "employment_contract.pdf",
+      "previewExportLabel": "Download",
+      "previewExportPdfName": "service_agreement.pdf",
+      "previewExportDocxName": "service_agreement.docx",
+      "previewWaitingQuestion": "Your question appears once context is ready…",
+      "askPlaceholder": "Ask about Armenian law...",
+      "previewUseCases": [
+        {
+          "withAttachment": true,
+          "question": "What is the deadline to register an employee in the tax system after starting operations?",
+          "answerTitle": "Conclusion",
+          "answerBody": "You should register the employee within 3 working days after the employment relationship starts.",
+          "tags": ["RA Labor Code, Art. 88", "Official registry", "RA Gov. Decree 23-N"]
+        },
+        {
+          "withExport": true,
+          "question": "Draft a service agreement for my company",
+          "answerTitle": "Service agreement ready",
+          "answerBody": "Generating a service agreement aligned with the RA Civil Code — including pricing, payment terms, liability, and termination clauses...",
+          "exportPdfName": "service_agreement.pdf",
+          "exportDocxName": "service_agreement.docx"
+        },
+        {
+          "question": "When must I register for VAT as an individual entrepreneur in Armenia?",
+          "answerTitle": "Summary",
+          "answerBody": "VAT registration is required once turnover crosses the statutory threshold; invoicing and filing follow the RA Tax Code and e-invoicing rules.",
+          "tags": ["RA Tax Code", "VAT registration", "e-invoicing"]
+        },
+        {
+          "withExport": true,
+          "question": "Draft a commercial lease for office space in Yerevan",
+          "answerTitle": "Lease draft ready",
+          "answerBody": "Generating a commercial lease with rent, maintenance, permitted use, and handover clauses aligned with the RA Civil Code...",
+          "exportPdfName": "commercial_lease.pdf",
+          "exportDocxName": "commercial_lease.docx"
+        },
+        {
+          "question": "What notice period applies when terminating an indefinite-term employment contract?",
+          "answerTitle": "Conclusion",
+          "answerBody": "Notice periods depend on who initiates and on valid grounds; the Labor Code sets minimum notice and exceptions for serious misconduct or mutual agreement.",
+          "tags": ["RA Labor Code", "Notice period", "Termination grounds"]
+        }
+      ],
+      "chat": {
+        "userQuestion1": "What is the deadline to register an employee in the tax system after starting operations?",
+        "assistantConclusionText": "You should register the employee within 3 working days after the employment relationship starts.",
+        "assistantConclusionTitle": "Conclusion",
+        "assistantConclusionTags": ["RA Labor Code, Art. 88", "Official registry", "RA Gov. Decree 23-N"],
+        "userQuestion2": "Draft a service agreement for my company",
+        "assistantDraftTitle": "Service agreement ready",
+        "assistantDraftText": "Generating a service agreement aligned with the RA Civil Code — including pricing, payment terms, liability, and termination clauses..."
+      }
+    },
+    "heroStats": [
+      { "value": "10,000+", "label": "Laws indexed" },
+      { "value": "3 languages", "label": "AM · RU · EN" },
+      { "value": "Weekly", "label": "Database updates" }
+    ],
+    "problem": {
+      "sectionLabel": "The problem",
+      "titleMain": "Legal research in Armenia",
+      "titleAccent": "stuck in 2005",
+      "description": "The official sources exist, but the tools to use them efficiently do not. Until now.",
+      "oldWayBadge": "The old way",
+      "withDoLegalBadge": "With DoLegal",
+      "oldWayItems": [
+        "Manual keyword search across legal sources with no semantic understanding",
+        "No way to check if you found the current version of a law or an outdated amendment",
+        "Copy-pasting text between tabs to draft contracts or legal letters from scratch",
+        "2+ hours spent per case on research that still may miss relevant precedents",
+        "Global AI tools have zero Armenian law coverage"
+      ],
+      "doLegalItems": [
+        "Ask in Armenian, Russian, or English - get answers grounded in the actual law",
+        "Every answer cites the exact article, law code, and source - verify in one click",
+        "Generate NDAs, employment contracts, legal letters, and reporting drafts from prompts",
+        "Cut research and reporting prep time from 2 hours to under 20 minutes per case",
+        "Built specifically for Armenian law - updated every week from official sources"
+      ]
+    },
+    "features": {
+      "sectionLabel": "Core capabilities",
+      "titleMain": "Three tools.",
+      "titleAccent": "One interface.",
+      "description": "DoLegal combines legal research, document drafting, and legal assistant guidance - all powered by RAG retrieval over authoritative Armenian legal corpora.",
+      "cards": [
+        {
+          "number": "01",
+          "title": "Legal Research Assistant",
+          "description": "Ask natural-language questions in Armenian, Russian, or English and receive structured answers with article-level citations.",
+          "items": [
+            "Summarizes laws, regulations, and court decisions",
+            "Identifies relevant clauses and legal precedents",
+            "Cross-references official Armenian government legislation sources",
+            "Structured output: Conclusion -> Reasoning -> References",
+            "Upload a document for context-aware Q&A"
+          ]
+        },
+        {
+          "number": "02",
+          "title": "Document Drafting",
+          "description": "Generate standard legal documents from prompts, with context-aware content pre-filled based on your inputs.",
+          "items": [
+            "NDAs, employment contracts, service agreements",
+            "Statutory letters, claims, and formal notices",
+            "Template-based or freeform document generation",
+            "Export to DOCX for final editing",
+            "Document comparison (Pro and above)"
+          ]
+        },
+        {
+          "number": "03",
+          "title": "Legal Assistant",
+          "description": "Understand what the law means for your situation - not just what it says. Step-by-step guidance for common legal scenarios.",
+          "items": [
+            "Tax obligations, reporting cycles, state compliance",
+            "Company <-> state institution interaction guides",
+            "Implication analysis for regulations",
+            "Entity and clause extraction from uploaded docs",
+            "OCR support for scanned legal documents"
+          ]
+        }
+      ]
+    },
+    "howItWorks": {
+      "sectionLabel": "How it works",
+      "titleMain": "From question",
+      "titleAccent": "verified answer",
+      "steps": [
+        {
+          "title": "Ask in your language",
+          "description": "Type your question in Armenian, Russian, or English - or upload a contract, court decision, or scanned document for analysis."
+        },
+        {
+          "title": "AI retrieves the law",
+          "description": "DoLegal searches its indexed corpus of Armenian legislation and case law, retrieves the most relevant articles, and generates a grounded answer."
+        },
+        {
+          "title": "Verify every citation",
+          "description": "Each answer includes article codes, law names, dates, and the responsible body. Every legal claim is traceable back to its source."
+        }
+      ]
+    },
+    "personas": {
+      "sectionLabel": "Who uses DoLegal",
+      "titleMain": "Built for legal and accounting professionals",
+      "titleAccent": "and ambitious founders",
+      "cards": [
+        {
+          "tag": "Solo practitioners",
+          "title": "Independent Lawyers & Accountants",
+          "description": "Solo professionals managing 10-20 active clients who spend 30-40% of their time on manual legal and tax compliance research.",
+          "wins": [
+            "Research time: 2 hours -> 20 minutes per case",
+            "Draft standard contracts in minutes, not hours",
+            "Track tax and reporting rule updates with weekly refreshes",
+            "Starts at 8,000 AMD/month"
+          ]
+        },
+        {
+          "tag": "2-10 person practice",
+          "title": "Law & Accounting Firms",
+          "description": "Teams that need consistent legal and tax document quality plus shared access to official legislation knowledge.",
+          "wins": [
+            "Shared token pool for the whole team",
+            "Standardized document templates across staff",
+            "Consistent citation quality on legal and tax deliverables",
+            "Rocket plan: 1M tokens/month"
+          ]
+        },
+        {
+          "tag": "Business teams",
+          "title": "SME Founders & In-house Accountants",
+          "description": "Business owners and in-house accountants who need to handle tax accounting responsibilities, submit reports, draft agreements, and navigate state compliance.",
+          "wins": [
+            "Understand reporting cycles, tax duties, and filing requirements",
+            "Draft NDAs and employment contracts yourself",
+            "Navigate company <-> state institution interactions",
+            "Join early access now, choose a plan at launch"
+          ]
+        }
+      ]
+    },
+    "pricing": {
+      "sectionLabel": "Pricing",
+      "titleMain": "Transparent pricing.",
+      "titleAccent": "No hidden fees.",
+      "description": "Planned launch pricing. Join early access now and we will notify you when subscriptions go live.",
+      "mostPopular": "Most popular",
+      "needsMoreTokensTitle": "Need more tokens mid-month?",
+      "needsMoreTokensDescription": "Top up your balance without changing your plan.",
+      "plans": [
+        {
+          "name": "Free",
+          "price": "0",
+          "period": "Planned launch tier",
+          "featured": false,
+          "cta": "Join waitlist",
+          "features": [
+            { "text": "8 trial queries (guest)", "enabled": true },
+            { "text": "1,400 tokens/month (registered)", "enabled": true },
+            { "text": "1 saved conversation", "enabled": true },
+            { "text": "No file upload", "enabled": false },
+            { "text": "No document drafting", "enabled": false },
+            { "text": "No pinned chats", "enabled": false }
+          ]
+        },
+        {
+          "name": "Basic",
+          "price": "8,000",
+          "period": "per month",
+          "featured": false,
+          "cta": "Join waitlist",
+          "features": [
+            { "text": "40,000 tokens/month", "enabled": true },
+            { "text": "File upload up to 5 MB", "enabled": true },
+            { "text": "Document drafting", "enabled": true },
+            { "text": "3 pinned conversations", "enabled": true },
+            { "text": "DOCX export", "enabled": true },
+            { "text": "No document comparison", "enabled": false }
+          ]
+        },
+        {
+          "name": "Pro",
+          "price": "15,000",
+          "period": "per month",
+          "featured": true,
+          "cta": "Join waitlist",
+          "features": [
+            { "text": "250,000 tokens/month", "enabled": true },
+            { "text": "File upload up to 10 MB", "enabled": true },
+            { "text": "Document comparison", "enabled": true },
+            { "text": "5 pinned conversations", "enabled": true },
+            { "text": "Priority AI response", "enabled": true },
+            { "text": "Full chat history", "enabled": true }
+          ]
+        },
+        {
+          "name": "Rocket",
+          "price": "25,000",
+          "period": "per month",
+          "featured": false,
+          "cta": "Join waitlist",
+          "features": [
+            { "text": "1,000,000 tokens/month", "enabled": true },
+            { "text": "File upload up to 25 MB", "enabled": true },
+            { "text": "Everything in Pro", "enabled": true },
+            { "text": "Unlimited pinned chats", "enabled": true },
+            { "text": "Dedicated support", "enabled": true },
+            { "text": "Team usage (shared tokens)", "enabled": true }
+          ]
+        }
+      ],
+      "topups": [
+        { "tokens": "10,000 tokens", "price": "AMD 4,000" },
+        { "tokens": "15,000 tokens", "price": "AMD 6,000" },
+        { "tokens": "25,000 tokens", "price": "AMD 10,000" }
+      ]
+    },
+    "faq": {
+      "sectionLabel": "FAQ",
+      "titleMain": "Common",
+      "titleAccent": "questions",
+      "descriptionPrefix": "Still have questions? Write to us at",
+      "email": "hello@dolegal.am",
+      "items": [
+        {
+          "question": "Is this legal counsel?",
+          "answer": "No. DoLegal is a legal research and drafting tool - not a lawyer. All responses include a disclaimer and should be reviewed by a qualified legal professional before taking action."
+        },
+        {
+          "question": "How accurate are the citations?",
+          "answer": "Every response is grounded in retrieved text from official government legislation sources. We target high citation alignment on monthly sample audits."
+        },
+        {
+          "question": "What languages does DoLegal support?",
+          "answer": "You can ask questions and receive answers in Armenian, Russian, or English. The legal corpus is primarily Armenian with cross-language retrieval."
+        },
+        {
+          "question": "What is a token? How many do I need?",
+          "answer": "A token is a unit of AI processing - roughly 0.75 words. Typical legal questions use 500-1,500 tokens, while full drafts use more."
+        },
+        {
+          "question": "Can I cancel or change plans anytime?",
+          "answer": "Yes. Upgrades apply immediately with prorated billing, downgrades apply in the next billing cycle, and you can cancel any time."
+        },
+        {
+          "question": "How fresh is the legal database?",
+          "answer": "The corpus is updated weekly from official Armenian government legislation sources."
+        }
+      ]
+    },
+    "earlyAccess": {
+      "sectionLabel": "Coming soon",
+      "titleMain": "Join the early access",
+      "titleAccent": "for DoLegal",
+      "description": "The product is not publicly released yet. Join the waitlist and get invited as soon as we open access.",
+      "emailLabel": "Email Address",
+      "emailPlaceholder": "you@company.com",
+      "buttonLabel": "Join Early Access",
+      "footnote": "Early access list only - Invitations sent in batches"
+    },
+    "footer": {
+      "description": "AI-powered legal research and drafting for the Armenian market. Built on official Armenian government legislation sources.",
+      "copyright": "© 2026 DoLegal. All rights reserved.",
+      "columns": [
+        { "title": "Product", "links": ["Features", "Pricing", "How it works", "Changelog"] },
+        { "title": "Legal", "links": ["Terms of Service", "Privacy Policy", "Disclaimer", "Cookie Policy"] },
+        { "title": "Company", "links": ["About", "Blog", "Contact", "hello@dolegal.am"] }
+      ]
+    }
+  }
+}

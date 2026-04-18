@@ -2,7 +2,7 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #1d1d1f;
 }
 
 @theme inline {
@@ -12,15 +12,174 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: auto;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
+}
+
+/* Ensure anchor jumps land below fixed navbar */
+.landing-scroll-target {
+  scroll-margin-top: 6.5rem;
+}
+
+/** Hero dotted atmosphere: organized grid + subtle stagger */
+.landing-hero-dotted {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background-color: #ffffff;
+  background-image:
+    radial-gradient(circle, rgba(29, 29, 31, 0.2) 1.5px, transparent 1.7px),
+    radial-gradient(circle, rgba(29, 29, 31, 0.11) 1.2px, transparent 1.4px),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.08) 46%, rgba(255, 255, 255, 0) 100%);
+  background-size:
+    54px 54px,
+    54px 54px,
+    100% 100%;
+  background-position:
+    0 0,
+    27px 27px,
+    0 0;
+  background-repeat: repeat, repeat, no-repeat;
+}
+
+.landing-hero-dotted::before,
+.landing-hero-dotted::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  z-index: 0;
+  border-radius: 9999px;
+}
+
+.landing-hero-dotted::before {
+  top: -18%;
+  left: -14%;
+  width: 36rem;
+  height: 36rem;
+  opacity: 0.75;
+  background:
+    radial-gradient(circle, rgba(29, 29, 31, 0.2) 1.6px, transparent 1.8px),
+    radial-gradient(circle, rgba(29, 29, 31, 0.12) 1.1px, transparent 1.3px);
+  background-size: 56px 56px, 56px 56px;
+  background-position: 0 0, 28px 28px;
+  background-repeat: repeat, repeat;
+  transform: rotate(-4deg);
+}
+
+.landing-hero-dotted::after {
+  right: -12%;
+  bottom: -26%;
+  width: 30rem;
+  height: 30rem;
+  opacity: 0.62;
+  background:
+    radial-gradient(circle, rgba(29, 29, 31, 0.18) 1.5px, transparent 1.7px),
+    radial-gradient(circle, rgba(29, 29, 31, 0.1) 1px, transparent 1.2px);
+  background-size: 52px 52px, 52px 52px;
+  background-position: 0 0, 26px 26px;
+  background-repeat: repeat, repeat;
+  transform: rotate(4deg);
+}
+
+.landing-hero-dotted > * {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes hero-preview-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-ans-label {
+    animation: hero-preview-in 0.4s ease-out both;
+  }
+
+  .hero-ans-1 {
+    animation: hero-preview-in 0.42s ease-out 0.06s both;
+  }
+
+  .hero-ans-2 {
+    animation: hero-preview-in 0.42s ease-out 0.12s both;
+  }
+
+  .hero-ans-3 {
+    animation: hero-preview-in 0.42s ease-out 0.2s both;
+  }
+
+  .hero-ans-export {
+    animation: hero-preview-in 0.45s ease-out 0.14s both;
+  }
+
+  @keyframes hero-preview-progress {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  .hero-preview-progress {
+    animation-name: hero-preview-progress;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+  }
+
+  /** Subtle depth pulse — keeps the card from feeling frozen */
+  @keyframes hero-card-idle {
+    0%,
+    100% {
+      box-shadow:
+        0 1px 0 rgba(0, 0, 0, 0.04),
+        0 12px 48px rgba(0, 0, 0, 0.07);
+    }
+    50% {
+      box-shadow:
+        0 1px 0 rgba(0, 0, 0, 0.04),
+        0 15px 50px rgba(0, 0, 0, 0.08);
+    }
+  }
+
+  .hero-preview-card-idle {
+    animation: hero-card-idle 8s ease-in-out infinite;
+  }
+
+}
+
+/** Hero rotating audience: line rises into place from below */
+@keyframes hero-audience-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(0.55em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-audience-slide-up {
+    animation: hero-audience-slide-up 0.45s ease-out both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
