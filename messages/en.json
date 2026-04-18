@@ -10,7 +10,7 @@
       "titleMain": "Legal AI Assistant",
       "titleFor": "for:",
       "titleAudienceRotating": ["lawyers", "accountants", "SME founders"],
-      "description": "Working under RA law means pulling rules from many places—and you need to show which article you used. DoLegal answers and drafts from indexed official legislation with citations, so your work points to the statute, not a generic model.",
+      "description": "DoLegal provides legal assistance grounded in indexed RA legislation—from answering complex, contextual questions to drafting agreements, references, and reports—in minutes.",
       "primaryCta": "Join Early Access",
       "secondaryCta": "See how it works",
       "onlineStatus": "Online",
@@ -150,8 +150,8 @@
     },
     "howItWorks": {
       "sectionLabel": "How it works",
-      "titleMain": "From question",
-      "titleAccent": "verified answer",
+      "titleMain": "From questions to",
+      "titleAccent": "verified answers",
       "steps": [
         {
           "title": "Ask in your language",
