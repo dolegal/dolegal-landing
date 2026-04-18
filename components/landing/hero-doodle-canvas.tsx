@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
+import { DoLegalWordmark } from "./dolegal-wordmark";
 import { DocxFileIcon, PdfFileIcon } from "./hero-document-icons";
 
 /** ~8.5s per slide — five scenarios cycle in under 45s */
@@ -163,9 +164,7 @@ export function HeroDoodleCanvas() {
     <div className="relative mx-auto w-full max-w-3xl">
       <div className="hero-preview-card-idle overflow-hidden rounded-2xl border border-black/10 bg-white p-6 shadow-[0_1px_0_rgba(0,0,0,0.04),0_12px_48px_rgba(0,0,0,0.07)] md:p-8">
         <div className="mb-8 flex items-center justify-between gap-4">
-          <span className="[font-family:var(--font-playfair)] text-xl font-semibold tracking-tight text-[#1d1d1f] md:text-2xl">
-            DoLegal
-          </span>
+          <DoLegalWordmark className="[font-family:var(--font-playfair)] text-xl font-semibold tracking-tight text-[#1d1d1f] md:text-2xl" />
           <span className="shrink-0 rounded-full border border-black/10 bg-neutral-50 px-3 py-1.5 text-[11px] font-medium tracking-wide text-black/50">
             {t("hero.previewBadge")}
           </span>

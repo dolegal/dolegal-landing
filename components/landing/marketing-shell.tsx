@@ -6,6 +6,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { Outfit, Playfair_Display } from "next/font/google";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { languageOptions, type LandingContent } from "./content";
+import { DoLegalWordmark } from "./dolegal-wordmark";
 
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
@@ -70,7 +71,7 @@ export function MarketingShell({ children }: { children: ReactNode }) {
       <nav className="fixed inset-x-0 top-0 z-50 border-b border-black/10 bg-white/90 px-6 backdrop-blur-xl md:px-8">
         <div className="mx-auto flex h-[68px] w-full max-w-7xl items-center justify-between">
           <Link className="[font-family:var(--font-playfair)] text-[32px] font-semibold" href="/">
-            DoLegal
+            <DoLegalWordmark />
           </Link>
           <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-10 md:flex">
             {content.navigationLinks.map((link) => {
@@ -177,7 +178,9 @@ export function MarketingShell({ children }: { children: ReactNode }) {
       <footer className="border-t border-white/15 bg-[#1d1d1f] px-5 pt-14 text-white md:px-10">
         <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-2 xl:grid-cols-[1.6fr_1fr_1fr_1fr]">
           <div>
-            <div className="mb-3 [font-family:var(--font-playfair)] text-2xl font-semibold">DoLegal</div>
+            <div className="mb-3 [font-family:var(--font-playfair)] text-2xl font-semibold">
+              <DoLegalWordmark variant="dark" />
+            </div>
             <p className="max-w-xs text-sm leading-7 text-white/65">{content.footer.description}</p>
           </div>
           {content.footer.columns.map((column) => (
