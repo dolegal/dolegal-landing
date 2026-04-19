@@ -1,34 +1,85 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useLocale } from "next-intl";
 import { useTranslations } from "next-intl";
-import { Noto_Sans_Armenian } from "next/font/google";
+import { Fraunces, JetBrains_Mono, Manrope, Noto_Sans_Armenian } from "next/font/google";
 import { DoLegalWordmark } from "./dolegal-wordmark";
 import { DocxFileIcon, PdfFileIcon } from "./hero-document-icons";
 
-/** ~17s per slide for a calmer preview pace */
-const ROTATE_MS = 17_000;
-const TYPE_MS = 32;
+/**
+ * Assistant “responding” stream uses {@link ANSWER_TYPE_MS} only.
+ * Everything else is scaled by REST_PACE so the preview feels slower outside the reply typing.
+ */
+const REST_PACE = 1.5;
+
+const TYPE_MS = 32 * REST_PACE;
 const ANSWER_TYPE_MS = 3;
-const notoSansArmenian = Noto_Sans_Armenian({
+const GAP_BETWEEN_TURNS_MS = 1_500 * REST_PACE;
+const DROP_TO_FILE_MS = 1_400 * REST_PACE;
+const DROP_TO_ANALYZING_MS = 3_300 * REST_PACE;
+const BEFORE_ANSWER_STREAM_MS = 500 * REST_PACE;
+
+/** Distinct from marketing shell (Outfit / Playfair) — reads as an embedded product preview */
+const previewUi = Manrope({
+  subsets: ["latin", "cyrillic", "latin-ext"],
+  variable: "--font-hero-preview-ui",
+  weight: ["400", "500", "600", "700"],
+});
+
+const previewBrand = Fraunces({
+  subsets: ["latin", "latin-ext"],
+  variable: "--font-hero-preview-brand",
+  weight: ["500", "600", "700"],
+});
+
+const previewMono = JetBrains_Mono({
+  subsets: ["latin", "cyrillic"],
+  variable: "--font-hero-preview-mono",
+  weight: ["400", "500"],
+});
+
+const previewHy = Noto_Sans_Armenian({
   subsets: ["armenian"],
-  variable: "--font-noto-sans-armenian",
-  weight: ["600"],
+  variable: "--font-hero-preview-hy",
+  weight: ["400", "500", "600"],
 });
 
 type DropPhase = "idle" | "dropped" | "analyzing";
+
+type PreviewCitation = {
+  instrument: string;
+  locator: string;
+  note?: string;
+};
 
 type PreviewUseCase = {
   question: string;
   answerTitle: string;
   answerBody: string;
+  citations?: PreviewCitation[];
   tags?: string[];
   withAttachment?: boolean;
   withExport?: boolean;
   exportPdfName?: string;
   exportDocxName?: string;
 };
+
+type ThreadAssistant = {
+  kind: "assistant";
+  title: string;
+  body: string;
+  citations?: PreviewCitation[];
+  tags?: string[];
+  showExport?: boolean;
+  exportPdfName?: string;
+  exportDocxName?: string;
+};
+
+type ThreadUser = { kind: "user"; text: string };
+type ThreadItem = ThreadUser | ThreadAssistant;
+
+type ChatPhase = "compose" | "answer" | "pause";
 
 export function HeroDoodleCanvas() {
   const locale = useLocale();
@@ -39,22 +90,25 @@ export function HeroDoodleCanvas() {
   );
   const slideCount = useCases.length;
 
-  const [slide, setSlide] = useState(0);
+  const [turnIndex, setTurnIndex] = useState(0);
+  const [items, setItems] = useState<ThreadItem[]>([]);
+  const [chatPhase, setChatPhase] = useState<ChatPhase>("compose");
+
   const [reducedMotion, setReducedMotion] = useState(false);
-  const [displayQuestion, setDisplayQuestion] = useState("");
   const [composerText, setComposerText] = useState("");
   const [questionSent, setQuestionSent] = useState(false);
-  const [requestSliding, setRequestSliding] = useState(false);
   const [displayAnswerBody, setDisplayAnswerBody] = useState("");
   const [typingDone, setTypingDone] = useState(false);
   const [dropPhase, setDropPhase] = useState<DropPhase>("idle");
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const sendTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const answerTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const s = useCases[slide % slideCount] ?? useCases[0];
+  const timerRef = useRef<number | null>(null);
+  const sendTimerRef = useRef<number | null>(null);
+  const answerTimerRef = useRef<number | null>(null);
+  const gapTimerRef = useRef<number | null>(null);
+  const scrollRef = useRef<HTMLDivElement | null>(null);
+
+  const s = useCases[turnIndex % slideCount] ?? useCases[0];
   const needsAttachment = Boolean(s.withAttachment);
-  const showExport = Boolean(s.withExport);
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -63,12 +117,6 @@ export function HeroDoodleCanvas() {
     mq.addEventListener("change", fn);
     return () => mq.removeEventListener("change", fn);
   }, []);
-
-  useEffect(() => {
-    if (reducedMotion) return;
-    const id = window.setInterval(() => setSlide((x) => (x + 1) % slideCount), ROTATE_MS);
-    return () => window.clearInterval(id);
-  }, [reducedMotion, slideCount]);
 
   useEffect(() => {
     if (!needsAttachment) return;
@@ -81,26 +129,31 @@ export function HeroDoodleCanvas() {
     const kick = window.setTimeout(() => {
       setDropPhase("idle");
     }, 0);
-    const t1 = window.setTimeout(() => setDropPhase("dropped"), 1_400);
-    const t2 = window.setTimeout(() => setDropPhase("analyzing"), 3_300);
+    const t1 = window.setTimeout(() => setDropPhase("dropped"), DROP_TO_FILE_MS);
+    const t2 = window.setTimeout(() => setDropPhase("analyzing"), DROP_TO_ANALYZING_MS);
     return () => {
       clearTimeout(kick);
       clearTimeout(t1);
       clearTimeout(t2);
     };
-  }, [slide, reducedMotion, needsAttachment]);
+  }, [turnIndex, reducedMotion, needsAttachment]);
 
   const contextReady = !needsAttachment || reducedMotion || dropPhase === "analyzing";
 
-  const submitQuestion = (question: string) => {
+  const submitQuestion = useCallback((question: string) => {
     const value = question.trim();
     if (!value) return;
-    setDisplayQuestion(value);
+    setItems((prev) => [...prev, { kind: "user", text: value }]);
     setComposerText("");
     setQuestionSent(true);
-    setRequestSliding(true);
-    window.requestAnimationFrame(() => setRequestSliding(false));
-  };
+    setChatPhase("answer");
+  }, []);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    el.scrollTo({ top: el.scrollHeight, behavior: reducedMotion ? "auto" : "smooth" });
+  }, [items, displayAnswerBody, chatPhase, reducedMotion]);
 
   useEffect(() => {
     if (timerRef.current) {
@@ -111,19 +164,16 @@ export function HeroDoodleCanvas() {
       clearTimeout(sendTimerRef.current);
       sendTimerRef.current = null;
     }
-    if (answerTimerRef.current) {
-      clearTimeout(answerTimerRef.current);
-      answerTimerRef.current = null;
+
+    if (chatPhase !== "compose") {
+      return;
     }
 
     if (!contextReady) {
       if (!reducedMotion) {
         const clear = window.setTimeout(() => {
           setComposerText("");
-          setDisplayQuestion("");
-          setDisplayAnswerBody("");
           setQuestionSent(false);
-          setRequestSliding(false);
           setTypingDone(false);
         }, 0);
         return () => clearTimeout(clear);
@@ -151,26 +201,22 @@ export function HeroDoodleCanvas() {
       }
       const ch = full[idx - 1];
       const delay = ch === " " || ch === "\n" ? TYPE_MS * 0.45 : TYPE_MS;
-      timerRef.current = setTimeout(step, delay);
+      timerRef.current = window.setTimeout(step, delay);
     };
 
     const kickoff = window.setTimeout(() => {
       setComposerText("");
-      setDisplayQuestion("");
-      setDisplayAnswerBody("");
       setQuestionSent(false);
-      setRequestSliding(false);
       setTypingDone(false);
-      timerRef.current = setTimeout(step, TYPE_MS * 1.1);
+      timerRef.current = window.setTimeout(step, TYPE_MS * 1.1);
     }, 0);
 
     return () => {
       clearTimeout(kickoff);
       if (timerRef.current) clearTimeout(timerRef.current);
       if (sendTimerRef.current) clearTimeout(sendTimerRef.current);
-      if (answerTimerRef.current) clearTimeout(answerTimerRef.current);
     };
-  }, [slide, s.question, reducedMotion, contextReady]);
+  }, [turnIndex, s.question, reducedMotion, contextReady, chatPhase, submitQuestion]);
 
   useEffect(() => {
     if (answerTimerRef.current) {
@@ -178,9 +224,11 @@ export function HeroDoodleCanvas() {
       answerTimerRef.current = null;
     }
 
-    if (!questionSent) {
-      setDisplayAnswerBody("");
-      setTypingDone(false);
+    if (chatPhase !== "answer" || !questionSent) {
+      if (chatPhase !== "answer") {
+        setDisplayAnswerBody("");
+        setTypingDone(false);
+      }
       return;
     }
 
@@ -188,6 +236,26 @@ export function HeroDoodleCanvas() {
       const raf = requestAnimationFrame(() => {
         setDisplayAnswerBody(s.answerBody);
         setTypingDone(true);
+        setItems((prev) => [
+          ...prev,
+          {
+            kind: "assistant",
+            title: s.answerTitle,
+            body: s.answerBody,
+            citations: s.citations,
+            tags: s.tags,
+            showExport: s.withExport,
+            exportPdfName: s.exportPdfName,
+            exportDocxName: s.exportDocxName,
+          },
+        ]);
+        setQuestionSent(false);
+        setDisplayAnswerBody("");
+        setTypingDone(false);
+        gapTimerRef.current = window.setTimeout(() => {
+          setTurnIndex((i) => (i + 1) % slideCount);
+          setChatPhase("compose");
+        }, GAP_BETWEEN_TURNS_MS);
       });
       return () => cancelAnimationFrame(raf);
     }
@@ -202,217 +270,279 @@ export function HeroDoodleCanvas() {
       setDisplayAnswerBody(full.slice(0, idx));
       if (idx >= full.length) {
         setTypingDone(true);
+        setItems((prev) => [
+          ...prev,
+          {
+            kind: "assistant",
+            title: s.answerTitle,
+            body: s.answerBody,
+            citations: s.citations,
+            tags: s.tags,
+            showExport: s.withExport,
+            exportPdfName: s.exportPdfName,
+            exportDocxName: s.exportDocxName,
+          },
+        ]);
+        setQuestionSent(false);
+        setDisplayAnswerBody("");
+        setTypingDone(false);
+        setChatPhase("pause");
+        gapTimerRef.current = window.setTimeout(() => {
+          setTurnIndex((i) => (i + 1) % slideCount);
+          setChatPhase("compose");
+        }, GAP_BETWEEN_TURNS_MS);
         return;
       }
       const ch = full[idx - 1];
       const delay = ch === " " || ch === "\n" ? ANSWER_TYPE_MS * 0.55 : ANSWER_TYPE_MS;
-      answerTimerRef.current = setTimeout(typeAnswer, delay);
+      answerTimerRef.current = window.setTimeout(typeAnswer, delay);
     };
 
     const startDelay = window.setTimeout(() => {
       setTypingDone(true);
-      answerTimerRef.current = setTimeout(typeAnswer, ANSWER_TYPE_MS);
-    }, 500);
+      answerTimerRef.current = window.setTimeout(typeAnswer, ANSWER_TYPE_MS);
+    }, BEFORE_ANSWER_STREAM_MS);
 
     return () => {
       clearTimeout(startDelay);
       if (answerTimerRef.current) clearTimeout(answerTimerRef.current);
     };
-  }, [questionSent, s.answerBody, reducedMotion]);
+  }, [chatPhase, questionSent, s, reducedMotion, slideCount]);
+
+  useEffect(() => {
+    return () => {
+      if (gapTimerRef.current) clearTimeout(gapTimerRef.current);
+    };
+  }, []);
 
   const showComposerCaret =
-    contextReady && !reducedMotion && !questionSent && composerText.length < s.question.length;
+    contextReady &&
+    !reducedMotion &&
+    chatPhase === "compose" &&
+    !questionSent &&
+    composerText.length < s.question.length;
 
-  const exportPdf = s.exportPdfName ?? t("hero.previewExportPdfName");
-  const exportDocx = s.exportDocxName ?? t("hero.previewExportDocxName");
-  const tags = s.tags && s.tags.length > 0 ? s.tags : null;
-
-  const questionBody = (
-    <div
-      className={`min-h-[4.5rem] px-4 py-4 text-[15px] leading-[1.55] text-black/[0.82] md:min-h-[5rem] md:px-5 md:text-[16px] ${
-        needsAttachment ? "bg-white" : "bg-neutral-50/90"
-      }`}
-      aria-live="polite"
-      aria-atomic="true"
-    >
-      {!contextReady && needsAttachment ? (
-        <span className="text-black/28">{t("hero.previewWaitingQuestion")}</span>
-      ) : !questionSent ? (
-        <span className="text-black/28">{t("hero.previewWaitingQuestion")}</span>
-      ) : (
-        <>
-          <span
-            className={`inline-block whitespace-pre-wrap transition-all duration-300 ease-out ${
-              requestSliding ? "translate-y-4 opacity-0" : "translate-y-0 opacity-100"
+  const renderAssistantCard = (
+    uc: PreviewUseCase,
+    bodyText: string,
+    opts: { streaming: boolean }
+  ) => {
+    const tags = uc.tags && uc.tags.length > 0 ? uc.tags : null;
+    const cite = uc.citations && uc.citations.length > 0 ? uc.citations : null;
+    const pdf = uc.exportPdfName ?? t("hero.previewExportPdfName");
+    const docx = uc.exportDocxName ?? t("hero.previewExportDocxName");
+    return (
+      <div className="flex flex-col overflow-hidden rounded-xl border border-slate-200/60 bg-white shadow-sm shadow-slate-900/[0.04]">
+        <div className="px-4 py-4 md:px-5 md:py-5">
+          <p
+            className={`hero-ans-1 text-[13px] font-semibold text-slate-900 md:text-sm ${
+              locale === "hy" ? "[font-family:var(--font-hero-preview-hy)]" : ""
             }`}
           >
-            {displayQuestion}
-          </span>
-        </>
-      )}
-    </div>
-  );
+            {uc.answerTitle}
+          </p>
+          <p className="hero-ans-2 mt-2 line-clamp-4 text-[14px] leading-relaxed text-slate-600 md:line-clamp-none md:text-[15px]">
+            {bodyText}
+          </p>
+          {!opts.streaming && tags ? (
+            <p className="hero-ans-3 mt-3 text-[11px] leading-relaxed text-slate-400">
+              {tags.join(" · ")}
+            </p>
+          ) : null}
+        </div>
+        {!opts.streaming && cite ? (
+          <div className="hero-ans-cite border-t border-slate-200/35 bg-slate-50/55 px-4 py-2.5 md:px-5 md:py-3">
+            <p className="mb-1.5 text-[9px] font-normal uppercase tracking-[0.16em] text-slate-400/90">
+              {t("hero.previewSourcesLabel")}
+            </p>
+            <ul className="space-y-1.5">
+              {cite.map((c, i) => (
+                <li key={`${c.instrument}-${i}`} className="text-[10px] font-normal leading-snug text-slate-500/95">
+                  <span className="text-slate-400/95">{c.instrument}</span>
+                  <span className="text-slate-300/90"> · </span>
+                  <span className="text-slate-500/90">{c.locator}</span>
+                  {c.note ? (
+                    <span className="mt-0.5 block text-[9px] font-normal leading-relaxed text-slate-400/85">
+                      {c.note}
+                    </span>
+                  ) : null}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
+        {!opts.streaming && uc.withExport ? (
+          <div className="hero-ans-export border-t border-slate-200/50 bg-white px-4 pb-4 pt-4 md:px-5 md:pb-5 md:pt-5">
+            <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.14em] text-slate-500">
+              {t("hero.previewExportLabel")}
+            </p>
+            <div className="flex flex-wrap gap-2.5">
+              <div className="flex min-w-0 max-w-full items-center gap-2.5 rounded-lg border border-slate-200/70 bg-slate-50/90 px-3 py-2.5">
+                <span className="inline-flex h-10 w-8 shrink-0 items-center justify-center">
+                  <PdfFileIcon />
+                </span>
+                <span className="truncate text-[12px] font-medium text-slate-700 [font-family:var(--font-hero-preview-mono)]">
+                  {pdf}
+                </span>
+              </div>
+              <div className="flex min-w-0 max-w-full items-center gap-2.5 rounded-lg border border-slate-200/70 bg-slate-50/90 px-3 py-2.5">
+                <span className="inline-flex h-10 w-8 shrink-0 items-center justify-center">
+                  <DocxFileIcon />
+                </span>
+                <span className="truncate text-[12px] font-medium text-slate-700 [font-family:var(--font-hero-preview-mono)]">
+                  {docx}
+                </span>
+              </div>
+            </div>
+          </div>
+        ) : null}
+      </div>
+    );
+  };
+
+  const assistantFromThread = (item: ThreadAssistant): PreviewUseCase => ({
+    question: "",
+    answerTitle: item.title,
+    answerBody: item.body,
+    citations: item.citations,
+    tags: item.tags,
+    withExport: item.showExport,
+    exportPdfName: item.exportPdfName,
+    exportDocxName: item.exportDocxName,
+  });
+
+  const cardFontClass =
+    locale === "hy" ? "[font-family:var(--font-hero-preview-hy)]" : "[font-family:var(--font-hero-preview-ui)]";
 
   return (
-    <div className={`relative mx-auto w-full max-w-3xl ${notoSansArmenian.variable}`}>
-      <div className="hero-preview-card-idle flex h-[555px] flex-col overflow-hidden rounded-2xl border border-black/10 bg-white p-6 shadow-[0_1px_0_rgba(0,0,0,0.04),0_12px_48px_rgba(0,0,0,0.07)] md:p-8">
-        <div className="mb-8 flex items-center justify-between gap-4">
-          <DoLegalWordmark className="[font-family:var(--font-playfair)] text-xl font-semibold tracking-tight text-[#1d1d1f] md:text-2xl" />
-          <span className="shrink-0 rounded-full border border-black/10 bg-neutral-50 px-3 py-1.5 text-[11px] font-medium tracking-wide text-black/50">
+    <div
+      className={`${previewUi.variable} ${previewBrand.variable} ${previewMono.variable} ${previewHy.variable} relative mx-auto w-full max-w-3xl`}
+    >
+      <div
+        className={`hero-preview-card-idle flex h-[555px] flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-[#e8ebf2] p-6 shadow-[0_1px_0_rgba(15,23,42,0.06),0_22px_60px_rgba(15,23,42,0.11)] ring-1 ring-white/75 md:p-8 ${cardFontClass}`}
+      >
+        <div className="mb-4 flex shrink-0 items-center justify-between gap-4">
+          <DoLegalWordmark className="[font-family:var(--font-hero-preview-brand)] text-xl font-semibold tracking-tight text-slate-800 md:text-2xl" />
+          <span className="shrink-0 rounded-full border border-slate-200/80 bg-white/85 px-3 py-1.5 text-[11px] font-medium tracking-wide text-slate-500">
             {t("hero.previewBadge")}
           </span>
         </div>
 
-        <div className="flex flex-1 flex-col overflow-hidden">
-          <section>
-            <p
-              className={`mb-3 text-[11px] uppercase tracking-[0.14em] text-black/40 ${
-                locale === "hy" ? "font-semibold [font-family:var(--font-noto-sans-armenian)]" : "font-medium"
-              }`}
-            >
-              {t("hero.previewQuestionLabel")}
-            </p>
-
-            {needsAttachment ? (
-              <div className="overflow-hidden rounded-xl border border-black/[0.08] bg-white shadow-[inset_0_1px_0_rgba(255,255,255,0.8)]">
-                <div className="border-b border-black/[0.06] bg-gradient-to-b from-neutral-50/95 to-neutral-50/40 px-4 py-3.5 md:px-5">
-                  <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.12em] text-black/38">
-                    {t("hero.previewAttachmentLabel")}
-                  </p>
-                  <div
-                    key={dropPhase}
-                    className="hero-context-strip min-h-[3.25rem] motion-safe:transition-opacity motion-safe:duration-300"
-                  >
-                    {dropPhase === "idle" ? (
-                      <div className="flex gap-3">
-                        <span className="inline-flex h-10 w-8 shrink-0 items-center justify-center rounded-md border border-black/8 bg-white shadow-sm">
-                          <PdfFileIcon />
-                        </span>
-                        <div className="min-w-0 flex-1">
-                          <p className="text-[13px] leading-snug text-black/70 md:text-[14px]">
-                            {t("hero.previewAttachmentIdle")}
-                          </p>
-                          <p className="mt-1 text-[11px] text-black/38">{t("hero.previewDropzoneFormats")}</p>
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="flex items-start gap-3 sm:items-center">
-                        <span className="inline-flex h-10 w-8 shrink-0 items-center justify-center">
-                          <PdfFileIcon />
-                        </span>
-                        <div className="min-w-0 flex-1">
-                          <p className="truncate font-mono text-[12px] font-semibold text-[#1d1d1f] md:text-[13px]">
-                            {t("hero.previewAnalyzedFile")}
-                          </p>
-                          {dropPhase === "dropped" ? (
-                            <p className="mt-1 text-[12px] text-black/45">{t("hero.previewAnalyzing")}</p>
-                          ) : (
-                            <>
-                              <p className="mt-1 text-[12px] font-medium text-black/65">{t("hero.previewAnalyzing")}</p>
-                              <p className="mt-0.5 text-[12px] leading-relaxed text-black/42">
-                                {t("hero.previewAnalyzeDetail")}
-                              </p>
-                            </>
-                          )}
-                        </div>
-                      </div>
-                    )}
+        <div ref={scrollRef} className="min-h-0 flex-1 space-y-6 overflow-y-auto pr-1">
+          {items.map((item, i) =>
+            item.kind === "user" ? (
+              <section key={`u-${i}`}>
+                <p
+                  className={`mb-3 text-[11px] uppercase tracking-[0.14em] text-slate-500 ${
+                    locale === "hy" ? "font-semibold" : "font-medium"
+                  }`}
+                >
+                  {t("hero.previewQuestionLabel")}
+                </p>
+                <div className="overflow-hidden rounded-xl border border-slate-200/70 bg-white/95 shadow-[inset_0_1px_0_rgba(255,255,255,0.85)] shadow-sm shadow-slate-900/5">
+                  <div className="bg-slate-100/80 px-4 py-4 text-[15px] leading-[1.55] text-slate-800 md:px-5 md:text-[16px]">
+                    <span className="inline-block whitespace-pre-wrap">{item.text}</span>
                   </div>
                 </div>
-                {questionBody}
-              </div>
+              </section>
             ) : (
-              <div className="overflow-hidden rounded-xl border border-black/[0.08] bg-white shadow-[inset_0_1px_0_rgba(255,255,255,0.8)]">
-                {questionBody}
-              </div>
-            )}
-          </section>
-
-          {questionSent ? (
-            <section key={slide} className="mt-8 space-y-8">
-              <div>
+              <section key={`a-${i}`}>
                 <p
-                  className={`hero-ans-label mb-3 text-[11px] uppercase tracking-[0.14em] text-black/40 ${
-                    locale === "hy" ? "font-semibold [font-family:var(--font-noto-sans-armenian)]" : "font-medium"
+                  className={`hero-ans-label mb-3 text-[11px] uppercase tracking-[0.14em] text-slate-500 ${
+                    locale === "hy" ? "font-semibold" : "font-medium"
                   }`}
                 >
                   {t("hero.previewAnswerLabel")}
                 </p>
-                <div className="rounded-xl border border-black/[0.06] bg-white px-4 py-4 md:px-5 md:py-5">
-                  <p
-                    className={`hero-ans-1 text-[13px] font-semibold text-[#1d1d1f] md:text-sm ${
-                      locale === "hy" ? "[font-family:var(--font-noto-sans-armenian)]" : ""
-                    }`}
-                  >
-                    {s.answerTitle}
-                  </p>
-                  <p className="hero-ans-2 mt-2 line-clamp-4 text-[14px] leading-relaxed text-black/65 md:line-clamp-none md:text-[15px]">
-                    {displayAnswerBody}
-                  </p>
-                  {typingDone && tags ? (
-                    <p className="hero-ans-3 mt-4 border-t border-black/[0.06] pt-4 text-[12px] leading-relaxed text-black/45">
-                      {tags.join(" · ")}
-                    </p>
-                  ) : null}
+                {renderAssistantCard(assistantFromThread(item), item.body, { streaming: false })}
+              </section>
+            )
+          )}
 
-                  {typingDone && showExport ? (
-                    <div className="hero-ans-export mt-5 border-t border-black/[0.06] pt-5">
-                      <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.14em] text-black/40">
-                        {t("hero.previewExportLabel")}
-                      </p>
-                      <div className="flex flex-wrap gap-2.5">
-                        <div className="flex min-w-0 max-w-full items-center gap-2.5 rounded-lg border border-black/[0.07] bg-neutral-50/90 px-3 py-2.5">
-                          <span className="inline-flex h-10 w-8 shrink-0 items-center justify-center">
-                            <PdfFileIcon />
-                          </span>
-                          <span className="truncate font-mono text-[12px] font-medium text-black/75">{exportPdf}</span>
-                        </div>
-                        <div className="flex min-w-0 max-w-full items-center gap-2.5 rounded-lg border border-black/[0.07] bg-neutral-50/90 px-3 py-2.5">
-                          <span className="inline-flex h-10 w-8 shrink-0 items-center justify-center">
-                            <DocxFileIcon />
-                          </span>
-                          <span className="truncate font-mono text-[12px] font-medium text-black/75">{exportDocx}</span>
-                        </div>
-                      </div>
-                    </div>
-                  ) : null}
-                </div>
-              </div>
+          {chatPhase === "answer" && questionSent ? (
+            <section key="streaming-answer">
+              <p
+                className={`hero-ans-label mb-3 text-[11px] uppercase tracking-[0.14em] text-slate-500 ${
+                  locale === "hy" ? "font-semibold" : "font-medium"
+                }`}
+              >
+                {t("hero.previewAnswerLabel")}
+              </p>
+              {renderAssistantCard(s, displayAnswerBody, { streaming: true })}
             </section>
           ) : null}
-
-          <div className="mt-auto pt-3">
-            <div className="flex items-center gap-2 rounded-xl border border-black/[0.08] bg-white p-2.5">
-              <div className="flex min-h-[42px] flex-1 items-center rounded-lg border border-black/[0.08] bg-neutral-50/80 px-3 text-[13px] text-black/70">
-                <span className="line-clamp-1 whitespace-pre-wrap">{composerText}</span>
-                {showComposerCaret ? (
-                  <span
-                    className="ml-1 inline-block min-h-[1em] w-[2px] animate-pulse bg-[#1d1d1f]/45 motion-reduce:animate-none"
-                    aria-hidden
-                  />
-                ) : null}
-              </div>
-              <button
-                type="button"
-                onClick={() => submitQuestion(composerText || s.question)}
-                disabled={!contextReady || questionSent}
-                className="min-h-[42px] rounded-lg bg-[#1d1d1f] px-4 text-[12px] font-medium text-white transition disabled:cursor-not-allowed disabled:opacity-45"
-              >
-                {t("hero.previewSend")}
-              </button>
-            </div>
-          </div>
         </div>
 
-        {!reducedMotion ? (
-          <div className="mt-8 h-[3px] overflow-hidden rounded-full bg-black/[0.06]" aria-hidden>
-            <div
-              key={slide}
-              className="hero-preview-progress h-full origin-left rounded-full bg-black/25"
-              style={{ animationDuration: `${ROTATE_MS}ms` }}
-            />
+        {needsAttachment && chatPhase === "compose" ? (
+          <div className="mt-4 shrink-0 overflow-hidden rounded-xl border border-slate-200/70 bg-white/95 shadow-[inset_0_1px_0_rgba(255,255,255,0.85)] shadow-sm shadow-slate-900/5">
+            <div className="border-b border-slate-200/60 bg-gradient-to-b from-slate-100/95 to-slate-50/50 px-4 py-3.5 md:px-5">
+              <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.12em] text-slate-500">
+                {t("hero.previewAttachmentLabel")}
+              </p>
+              <div
+                key={dropPhase}
+                className="hero-context-strip min-h-[3.25rem] motion-safe:transition-opacity motion-safe:duration-300"
+              >
+                {dropPhase === "idle" ? (
+                  <div className="flex gap-3">
+                    <span className="inline-flex h-10 w-8 shrink-0 items-center justify-center rounded-md border border-black/8 bg-white shadow-sm">
+                      <PdfFileIcon />
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-[13px] leading-snug text-slate-600 md:text-[14px]">
+                        {t("hero.previewAttachmentIdle")}
+                      </p>
+                      <p className="mt-1 text-[11px] text-slate-500">{t("hero.previewDropzoneFormats")}</p>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex items-start gap-3 sm:items-center">
+                    <span className="inline-flex h-10 w-8 shrink-0 items-center justify-center">
+                      <PdfFileIcon />
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-[12px] font-semibold text-slate-800 [font-family:var(--font-hero-preview-mono)] md:text-[13px]">
+                        {t("hero.previewAnalyzedFile")}
+                      </p>
+                      {dropPhase === "dropped" ? (
+                        <p className="mt-1 text-[12px] text-slate-500">{t("hero.previewAnalyzing")}</p>
+                      ) : (
+                        <>
+                          <p className="mt-1 text-[12px] font-medium text-slate-600">{t("hero.previewAnalyzing")}</p>
+                          <p className="mt-0.5 text-[12px] leading-relaxed text-slate-500">
+                            {t("hero.previewAnalyzeDetail")}
+                          </p>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         ) : null}
+
+        <div className="mt-auto shrink-0 pt-4">
+          <div className="flex items-center gap-2 rounded-xl border border-slate-200/80 bg-white/90 p-2.5 shadow-sm shadow-slate-900/5">
+            <div className="flex min-h-[42px] flex-1 items-center rounded-lg border border-slate-200/70 bg-slate-50/90 px-3 text-[13px] text-slate-700">
+              <span className="line-clamp-1 whitespace-pre-wrap">{composerText}</span>
+              {showComposerCaret ? (
+                <span
+                  className="ml-1 inline-block min-h-[1em] w-[2px] animate-pulse bg-slate-600/50 motion-reduce:animate-none"
+                  aria-hidden
+                />
+              ) : null}
+            </div>
+            <button
+              type="button"
+              onClick={() => submitQuestion(composerText || s.question)}
+              disabled={!contextReady || chatPhase !== "compose" || questionSent}
+              className="min-h-[42px] shrink-0 rounded-full bg-sky-200 px-6 text-[12px] font-medium tracking-wide text-sky-950 transition hover:bg-sky-300 active:translate-y-px disabled:cursor-not-allowed disabled:opacity-45 disabled:hover:bg-sky-200"
+            >
+              {t("hero.previewSend")}
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

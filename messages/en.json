@@ -29,6 +29,7 @@
       "previewExportPdfName": "service_agreement.pdf",
       "previewExportDocxName": "service_agreement.docx",
       "previewSend": "Send",
+      "previewSourcesLabel": "Legal sources",
       "previewWaitingQuestion": "Your question appears once context is ready…",
       "askPlaceholder": "Ask about Armenian law...",
       "previewUseCases": [
@@ -36,36 +37,121 @@
           "withAttachment": true,
           "question": "What is the deadline to register an employee in the tax system after starting operations?",
           "answerTitle": "Conclusion",
-          "answerBody": "You should register the employee within 3 working days after the employment relationship starts.",
-          "tags": ["RA Labor Code, Art. 88", "Official registry", "RA Gov. Decree 23-N"]
+          "answerBody": "You should register the employee within 3 working days after the employment relationship starts. The same window applies for social-security and personal-income-tax enrolment with the SRC.",
+          "citations": [
+            {
+              "instrument": "RA LC",
+              "locator": "Art. 88 · employer registration duties",
+              "note": "Three working days from the start of employment; tied to tax and social-payment obligations."
+            },
+            {
+              "instrument": "RA Gov.Dec. 23-N",
+              "locator": "§§ 2–3 · employee registration procedure",
+              "note": "Forms and deadlines for notifying the State Revenue Committee."
+            },
+            {
+              "instrument": "RA TC",
+              "locator": "Arts. 65–66 · registration of taxpayers",
+              "note": "Personal income tax registration for employees and related filing hooks."
+            }
+          ],
+          "tags": ["RA Labor Code", "SRC registration", "Gov. 23-N"]
         },
         {
           "withExport": true,
           "question": "Draft a service agreement for my company",
           "answerTitle": "Service agreement ready",
-          "answerBody": "Generating a service agreement aligned with the RA Civil Code — including pricing, payment terms, liability, and termination clauses...",
+          "answerBody": "Generating a service agreement aligned with the RA Civil Code — including pricing, payment terms, liability caps, and termination — with headings mapped to mandatory notice and defect-remedy rules.",
+          "citations": [
+            {
+              "instrument": "RA CC",
+              "locator": "Arts. 435–447 · service / work contracts",
+              "note": "Core obligations, acceptance, and remedies for non-conforming performance."
+            },
+            {
+              "instrument": "RA CC",
+              "locator": "Arts. 314–318 · price, payment, interest",
+              "note": "Price determination, due dates, and late-payment context."
+            },
+            {
+              "instrument": "RA CC",
+              "locator": "Arts. 476–477 · limitation of liability",
+              "note": "Permissible scope of liability clauses in B2B service deals."
+            }
+          ],
           "exportPdfName": "service_agreement.pdf",
           "exportDocxName": "service_agreement.docx"
         },
         {
           "question": "When must I register for VAT as an individual entrepreneur in Armenia?",
           "answerTitle": "Summary",
-          "answerBody": "VAT registration is required once turnover crosses the statutory threshold; invoicing and filing follow the RA Tax Code and e-invoicing rules.",
-          "tags": ["RA Tax Code", "VAT registration", "e-invoicing"]
+          "answerBody": "VAT registration is required once turnover crosses the statutory threshold in any rolling 12-month period; invoicing and filing then follow the RA Tax Code and e-invoicing rules.",
+          "citations": [
+            {
+              "instrument": "RA TC",
+              "locator": "Art. 267 · VAT registration threshold",
+              "note": "Mandatory registration after the turnover test; voluntary below threshold in permitted cases."
+            },
+            {
+              "instrument": "RA TC",
+              "locator": "Arts. 268–271 · VAT payer obligations",
+              "note": "Invoices, rates, and reporting periods once registered."
+            },
+            {
+              "instrument": "RA Gov. (e-invoicing)",
+              "locator": "Annex · electronic invoice format",
+              "note": "Technical rules for VAT invoices in the national system."
+            }
+          ],
+          "tags": ["RA Tax Code", "VAT", "e-invoicing"]
         },
         {
           "withExport": true,
           "question": "Draft a commercial lease for office space in Yerevan",
           "answerTitle": "Lease draft ready",
-          "answerBody": "Generating a commercial lease with rent, maintenance, permitted use, and handover clauses aligned with the RA Civil Code...",
+          "answerBody": "Generating a commercial lease with rent indexation, OPEX/CAM allocation, permitted use, subletting rules, and handover condition — structured under the Civil Code lease chapter.",
+          "citations": [
+            {
+              "instrument": "RA CC",
+              "locator": "Arts. 583–618 · lease of buildings and premises",
+              "note": "Rent, maintenance, repairs, and return condition."
+            },
+            {
+              "instrument": "RA CC",
+              "locator": "Arts. 401–405 · term, renewal, termination",
+              "note": "Notice and exit mechanics for fixed and rolling terms."
+            },
+            {
+              "instrument": "RA CC",
+              "locator": "Art. 418 · transfer of risk",
+              "note": "Useful for insurance and damage allocation in office leases."
+            }
+          ],
           "exportPdfName": "commercial_lease.pdf",
           "exportDocxName": "commercial_lease.docx"
         },
         {
           "question": "What notice period applies when terminating an indefinite-term employment contract?",
           "answerTitle": "Conclusion",
-          "answerBody": "Notice periods depend on who initiates and on valid grounds; the Labor Code sets minimum notice and exceptions for serious misconduct or mutual agreement.",
-          "tags": ["RA Labor Code", "Notice period", "Termination grounds"]
+          "answerBody": "Notice periods depend on who initiates and on valid grounds: the Labor Code sets minimum notice for employer-initiated ordinary dismissals and shorter paths for serious misconduct, probation expiry, or mutual consent.",
+          "citations": [
+            {
+              "instrument": "RA LC",
+              "locator": "Art. 113 · notice on termination by employer",
+              "note": "Minimum calendar-day notice unless a separate ground applies."
+            },
+            {
+              "instrument": "RA LC",
+              "locator": "Arts. 81, 84 · immediate dismissal grounds",
+              "note": "No notice when misconduct or certain statutory breaches are proven under procedure."
+            },
+            {
+              "instrument": "RA LC",
+              "locator": "Art. 120 · employee resignation",
+              "note": "Employee’s notice when leaving on ordinary resignation."
+            }
+          ],
+          "tags": ["RA Labor Code", "Notice", "Termination"]
         }
       ],
       "chat": {
