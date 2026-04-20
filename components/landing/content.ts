@@ -88,6 +88,7 @@ export type LandingContent = {
     submittingButtonLabel: string;
     submittingMessage: string;
     successMessage: string;
+    duplicateMessage: string;
     errorMessage: string;
     footnote: string;
   };

@@ -71,14 +71,18 @@ export function LandingPage() {
         body: JSON.stringify({ email: normalizedEmail }),
       });
 
-      const payload = (await response.json()) as { message?: string };
+      const payload = (await response.json()) as { code?: string };
 
       if (!response.ok) {
-        throw new Error(payload.message || "Failed");
+        throw new Error(payload.code || "error");
       }
 
       setEarlyAccessState("success");
-      setEarlyAccessFeedback(payload.message || content.earlyAccess.successMessage);
+      if (payload.code === "duplicate") {
+        setEarlyAccessFeedback(content.earlyAccess.duplicateMessage);
+      } else {
+        setEarlyAccessFeedback(content.earlyAccess.successMessage);
+      }
       setEarlyAccessEmail("");
     } catch {
       setEarlyAccessState("error");
