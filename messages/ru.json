@@ -337,6 +337,10 @@
       "emailLabel": "Email",
       "emailPlaceholder": "you@company.com",
       "buttonLabel": "Присоединиться",
+      "submittingButtonLabel": "Отправка...",
+      "submittingMessage": "Отправляем вашу заявку...",
+      "successMessage": "Спасибо! Вы добавлены в список раннего доступа.",
+      "errorMessage": "Не удалось отправить заявку. Попробуйте еще раз немного позже.",
       "footnote": "Только список раннего доступа — приглашения отправляем партиями"
     },
     "footer": {

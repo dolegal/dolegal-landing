@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
-import type { MouseEvent } from "react";
+import type { FormEvent, MouseEvent } from "react";
+import { useState } from "react";
 import { HeroRotatingAudience } from "./hero-rotating-audience";
 import { HeroDoodleCanvas } from "./hero-doodle-canvas";
 import { landingImages, type LandingContent } from "./content";
@@ -49,6 +50,42 @@ export function LandingPage() {
   const t = useTranslations();
   const locale = useLocale();
   const content = t.raw("landing") as LandingContent;
+  const [earlyAccessEmail, setEarlyAccessEmail] = useState("");
+  const [earlyAccessState, setEarlyAccessState] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [earlyAccessFeedback, setEarlyAccessFeedback] = useState("");
+
+  const handleEarlyAccessSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const normalizedEmail = earlyAccessEmail.trim();
+    if (!normalizedEmail) return;
+
+    setEarlyAccessState("submitting");
+    setEarlyAccessFeedback(content.earlyAccess.submittingMessage);
+
+    try {
+      const response = await fetch("/api/early-access", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: normalizedEmail }),
+      });
+
+      const payload = (await response.json()) as { message?: string };
+
+      if (!response.ok) {
+        throw new Error(payload.message || "Failed");
+      }
+
+      setEarlyAccessState("success");
+      setEarlyAccessFeedback(payload.message || content.earlyAccess.successMessage);
+      setEarlyAccessEmail("");
+    } catch {
+      setEarlyAccessState("error");
+      setEarlyAccessFeedback(content.earlyAccess.errorMessage);
+    }
+  };
+
   const handleAnchorClick = (href: string) => (event: MouseEvent<HTMLAnchorElement>) => {
     if (!href.startsWith("#")) return;
     const target = document.querySelector<HTMLElement>(href);
@@ -258,7 +295,7 @@ export function LandingPage() {
             <em className="font-normal italic">{content.earlyAccess.titleAccent}</em>
           </h2>
           <p className="mx-auto mb-10 max-w-2xl text-base leading-7 text-white/60">{content.earlyAccess.description}</p>
-          <form className="mx-auto mb-4 flex max-w-xl flex-col gap-3 md:flex-row md:items-end">
+          <form className="mx-auto mb-4 flex max-w-xl flex-col gap-3 md:flex-row md:items-end" onSubmit={handleEarlyAccessSubmit}>
             <div className="w-full text-left">
               <label
                 htmlFor="early-access-email"
@@ -274,18 +311,32 @@ export function LandingPage() {
                 type="email"
                 required
                 placeholder={content.earlyAccess.emailPlaceholder}
+                value={earlyAccessEmail}
+                onChange={(event) => setEarlyAccessEmail(event.target.value)}
                 className="h-12 w-full rounded-xl border border-white/20 bg-white/5 px-4 text-[15px] text-white outline-none transition placeholder:text-white/35 focus:border-white/55"
+                disabled={earlyAccessState === "submitting"}
               />
             </div>
             <button
               type="submit"
+              disabled={earlyAccessState === "submitting"}
               className={`h-12 whitespace-nowrap rounded-xl bg-white px-6 text-[15px] text-[#1d1d1f] transition hover:bg-[#f5f5f7] ${
                 locale === "hy" ? "[font-family:var(--font-noto-sans-armenian)] font-semibold" : "font-medium"
               }`}
             >
-              {content.earlyAccess.buttonLabel}
+              {earlyAccessState === "submitting" ? content.earlyAccess.submittingButtonLabel : content.earlyAccess.buttonLabel}
             </button>
           </form>
+          {earlyAccessFeedback ? (
+            <p
+              className={`mx-auto max-w-xl text-sm ${
+                earlyAccessState === "error" ? "text-red-300" : "text-emerald-300"
+              }`}
+              aria-live="polite"
+            >
+              {earlyAccessFeedback}
+            </p>
+          ) : null}
           <p className="mt-5 text-xs text-white/35">{content.earlyAccess.footnote}</p>
         </section>
       </main>

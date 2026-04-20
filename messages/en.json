@@ -411,6 +411,10 @@
       "emailLabel": "Email Address",
       "emailPlaceholder": "you@company.com",
       "buttonLabel": "Join Early Access",
+      "submittingButtonLabel": "Submitting...",
+      "submittingMessage": "Submitting your request...",
+      "successMessage": "Thanks! You have been added to the early access list.",
+      "errorMessage": "We could not submit your request. Please try again in a moment.",
       "footnote": "Early access list only - Invitations sent in batches"
     },
     "footer": {

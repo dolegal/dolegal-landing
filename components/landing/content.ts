@@ -85,6 +85,10 @@ export type LandingContent = {
     emailLabel: string;
     emailPlaceholder: string;
     buttonLabel: string;
+    submittingButtonLabel: string;
+    submittingMessage: string;
+    successMessage: string;
+    errorMessage: string;
     footnote: string;
   };
   footer: {
