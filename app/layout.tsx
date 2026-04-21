@@ -20,6 +20,7 @@ const sans = IBM_Plex_Sans({
   variable: "--font-plex-sans",
   weight: ["400", "500", "600", "700"],
   display: "swap",
+  fallback: ["IBM Plex Sans Fallback", "system-ui", "sans-serif"],
 });
 
 const mono = IBM_Plex_Mono({
@@ -34,6 +35,7 @@ const interTight = Inter_Tight({
   variable: "--font-inter-tight",
   weight: ["400", "500", "600", "700"],
   display: "swap",
+  fallback: ["Inter Tight Fallback", "system-ui", "sans-serif"],
 });
 
 export const metadata: Metadata = {

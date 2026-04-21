@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 type DemoKey = "vat" | "draft" | "deadline";
 
@@ -16,100 +17,85 @@ interface DemoCite {
 
 interface Demo {
   q: string;
-  lang: string;
+  queryLabel: string;
   conclusion: string;
   body: DemoBody[];
   cites: DemoCite[];
 }
 
-const DEMOS: Record<DemoKey, Demo> = {
-  vat: {
-    q: "When must I register for VAT as an individual entrepreneur in Armenia?",
-    lang: "EN",
-    conclusion:
-      "VAT registration becomes mandatory once turnover crosses the statutory threshold in any rolling 12-month period. After registration, invoicing and filing follow the RA Tax Code and e-invoicing rules.",
-    body: [
-      {
-        h: "Reasoning",
-        p: "Armenia's Tax Code sets a turnover-based VAT threshold measured across any 12 consecutive months, not a calendar year. On crossing it, the taxpayer becomes a VAT payer from the next transaction onward and takes on the full package of invoicing, reporting, and e-filing duties.",
+function useLiveDemos(t: ReturnType<typeof useTranslations>) {
+  return useMemo((): Record<DemoKey, Demo> => {
+    const codeStyle = {
+      fontFamily: "var(--mono)",
+      fontSize: 13,
+      color: "var(--accent)",
+    } as const;
+    const suffixStyle = { color: "var(--ink-3)", fontSize: 14 } as const;
+
+    return {
+      vat: {
+        q: t("demoQuestion"),
+        queryLabel: t("demoQueryLabel"),
+        conclusion: t("demoAnswer"),
+        body: [
+          { h: t("demoVatBody1H"), p: t("demoVatBody1P") },
+          { h: t("demoVatBody2H"), p: t("demoVatBody2P") },
+        ],
+        cites: [
+          { tag: t("demoVatCite1Tag"), label: t("demoVatCite1Label") },
+          { tag: t("demoVatCite2Tag"), label: t("demoVatCite2Label") },
+          { tag: t("demoVatCite3Tag"), label: t("demoVatCite3Label") },
+        ],
       },
-      {
-        h: "What to do next",
-        p: "Register with the State Revenue Committee, switch your invoicing to e-invoices with the required VAT attributes, and begin monthly VAT returns.",
+      draft: {
+        q: t("demoDraftQuestion"),
+        queryLabel: t("demoDraftQueryLabel"),
+        conclusion: t("demoDraftAnswer"),
+        body: [
+          { h: t("demoDraftBody1H"), p: t("demoDraftBody1P") },
+          {
+            h: t("demoDraftBody2H"),
+            p: (
+              <>
+                <code style={codeStyle}>⬇ service_agreement.docx</code>
+                &nbsp;
+                <span style={suffixStyle}>{t("demoDraftDownloadSuffix")}</span>
+              </>
+            ),
+          },
+        ],
+        cites: [
+          { tag: t("demoDraftCite1Tag"), label: t("demoDraftCite1Label") },
+          { tag: t("demoDraftCite2Tag"), label: t("demoDraftCite2Label") },
+          { tag: t("demoDraftCite3Tag"), label: t("demoDraftCite3Label") },
+        ],
       },
-    ],
-    cites: [
-      { tag: "RA TC · Art. 267", label: "VAT registration threshold" },
-      { tag: "RA TC · Arts. 268–271", label: "VAT payer obligations" },
-      { tag: "SRC Ord. N-148", label: "E-invoicing requirements" },
-    ],
-  },
-  draft: {
-    q: "Draft a service agreement for my company.",
-    lang: "EN",
-    conclusion:
-      "Service agreement prepared. Draft aligns with the RA Civil Code — pricing, payment terms, liability caps, and termination — with headings mapped to mandatory notice and defect-remedy rules.",
-    body: [
-      {
-        h: "Document outline",
-        p: "1. Parties & Scope · 2. Price & Payment · 3. Performance & Delivery · 4. Warranties & Liability · 5. Termination & Notice · 6. Governing Law · 7. Signatures.",
+      deadline: {
+        q: t("demoDeadlineQuestion"),
+        queryLabel: t("demoDeadlineQueryLabel"),
+        conclusion: t("demoDeadlineAnswer"),
+        body: [{ h: t("demoDeadlineBody1H"), p: t("demoDeadlineBody1P") }],
+        cites: [
+          { tag: t("demoDeadlineCite1Tag"), label: t("demoDeadlineCite1Label") },
+          { tag: t("demoDeadlineCite2Tag"), label: t("demoDeadlineCite2Label") },
+        ],
       },
-      {
-        h: "Download",
-        p: (
-          <>
-            <code
-              style={{
-                fontFamily: "var(--mono)",
-                fontSize: 13,
-                color: "var(--accent)",
-              }}
-            >
-              ⬇ service_agreement.docx
-            </code>
-            &nbsp;
-            <span style={{ color: "var(--ink-3)", fontSize: 14 }}>
-              — ready to edit
-            </span>
-          </>
-        ),
-      },
-    ],
-    cites: [
-      { tag: "RA CC · Arts. 435–447", label: "Service & work contracts" },
-      { tag: "RA CC · Arts. 314–318", label: "Price, payment, interest" },
-      { tag: "RA CC · Art. 467", label: "Defect remedies" },
-    ],
-  },
-  deadline: {
-    q: "What is the deadline to register an employee after starting operations?",
-    lang: "EN",
-    conclusion:
-      "You must register the employee within 3 working days after the employment relationship begins. The same window applies for social-security and personal-income-tax enrolment with the SRC.",
-    body: [
-      {
-        h: "Reasoning",
-        p: "The Labour Code requires the employer to register the employment relationship at its formal commencement. Implementing regulations specify a 3-working-day registration window for both labour and tax-administration purposes.",
-      },
-    ],
-    cites: [
-      { tag: "RA LC · Art. 88", label: "Employer registration duties" },
-      {
-        tag: "Gov.Dec. 23-N · §§ 2–3",
-        label: "Employee registration procedure",
-      },
-    ],
-  },
-};
+    };
+  }, [t]);
+}
 
 export function LiveDemo() {
+  const t = useTranslations("landing.parity");
+  const demos = useLiveDemos(t);
+
   const [active, setActive] = useState<DemoKey>("vat");
   const [typed, setTyped] = useState("");
   const [isTyping, setIsTyping] = useState(true);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  const demo = demos[active];
+
   useEffect(() => {
-    const demo = DEMOS[active];
     setTyped("");
     setIsTyping(true);
 
@@ -128,9 +114,7 @@ export function LiveDemo() {
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
     };
-  }, [active]);
-
-  const demo = DEMOS[active];
+  }, [active, demo]);
 
   return (
     <div>
@@ -141,7 +125,7 @@ export function LiveDemo() {
             <i />
             <i />
           </div>
-          <div>dolegal.am / research</div>
+          <div>{t("demoChromeMiddle")}</div>
           <div>⌘K</div>
         </div>
         <div className="demo-body">
@@ -151,29 +135,29 @@ export function LiveDemo() {
               className={`demo-tab${active === "vat" ? " active" : ""}`}
               onClick={() => setActive("vat")}
             >
-              VAT threshold
+              {t("demoTab1")}
             </button>
             <button
               type="button"
               className={`demo-tab${active === "draft" ? " active" : ""}`}
               onClick={() => setActive("draft")}
             >
-              Draft a contract
+              {t("demoTab2")}
             </button>
             <button
               type="button"
               className={`demo-tab${active === "deadline" ? " active" : ""}`}
               onClick={() => setActive("deadline")}
             >
-              Reg. deadline
+              {t("demoTab3")}
             </button>
           </div>
 
           <div style={{ paddingBottom: 72 }} key={active}>
             <div className="msg-user fade-in">
-              <div className="avatar">ԵՄ</div>
+              <div className="avatar">{t("demoUserShort")}</div>
               <div className="msg-content">
-                <div className="msg-label">Query · {demo.lang}</div>
+                <div className="msg-label">{demo.queryLabel}</div>
                 <div
                   className="msg-text"
                   style={{ fontStyle: "italic", color: "var(--ink)" }}
@@ -186,7 +170,7 @@ export function LiveDemo() {
             <div className="msg-user msg-ai fade-in">
               <div className="avatar ai">d</div>
               <div className="msg-content">
-                <div className="msg-label">DoLegal</div>
+                <div className="msg-label">{t("demoAssistantLabel")}</div>
                 <div className="msg-text">
                   <div className={`conclusion${isTyping ? " caret" : ""}`}>
                     {typed}
@@ -203,9 +187,9 @@ export function LiveDemo() {
 
                       <div className="citations">
                         <div className="citations-title">
-                          <span>Legal sources</span>
+                          <span>{t("demoCitationsTitle")}</span>
                           <span style={{ color: "var(--accent)" }}>
-                            verified ↗
+                            {t("demoSourcesVerified")}
                           </span>
                         </div>
                         {demo.cites.map((c, i) => (
@@ -217,7 +201,7 @@ export function LiveDemo() {
                               <b>{c.tag}</b> — {c.label}
                             </div>
                             <a className="cite-link" href="#">
-                              View ↗
+                              {t("demoViewSource")}
                             </a>
                           </div>
                         ))}
@@ -230,9 +214,9 @@ export function LiveDemo() {
           </div>
 
           <div className="composer">
-            <span className="lang-tag">EN</span>
+            <span className="lang-tag">{t("demoComposerLang")}</span>
             <input
-              placeholder="Ask a question in Armenian, Russian, or English…"
+              placeholder={t("demoInputPlaceholder")}
               readOnly
             />
             <button className="send" aria-label="Send" type="button">
@@ -249,7 +233,7 @@ export function LiveDemo() {
           </div>
         </div>
       </div>
-      <p className="demo-note">↑ Live preview · switch questions above</p>
+      <p className="demo-note">{t("demoNote")}</p>
     </div>
   );
 }
