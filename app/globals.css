@@ -733,14 +733,9 @@ body.product-body { height: 100vh; overflow: hidden; font-size: 15px; }
   padding: 96px 0; position: relative;
 }
 .waitlist::before {
-  content: ""; position: absolute; inset: 0;
-  background-image:
-    repeating-linear-gradient(0deg, transparent 0 24px, color-mix(in oklch, var(--paper) 6%, transparent) 24px 25px);
-  pointer-events: none;
+  content: none;
 }
 .waitlist .wrap { position: relative; }
-.waitlist .section-label { color: color-mix(in oklch, var(--paper) 60%, transparent); }
-.waitlist .section-label::before { background: color-mix(in oklch, var(--paper) 85%, transparent); }
 .waitlist-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: end; }
 @media (max-width: 900px) { .waitlist-grid { grid-template-columns: 1fr; } }
 .waitlist h2 {
@@ -749,7 +744,8 @@ body.product-body { height: 100vh; overflow: hidden; font-size: 15px; }
   line-height: 1.2; letter-spacing: -0.03em; margin: 0 0 22px; color: var(--paper);
 }
 .waitlist h2 em { font-style: normal; color: color-mix(in oklch, var(--paper) 65%, transparent); font-weight: 400; }
-.waitlist p { font-family: var(--serif); font-size: 16px; color: color-mix(in oklch, var(--paper) 75%, transparent); max-width: 50ch; }
+.waitlist p:not(.section-label) { font-family: var(--serif); font-size: 16px; color: color-mix(in oklch, var(--paper) 75%, transparent); max-width: 50ch; }
+.waitlist .section-label { color: color-mix(in oklch, var(--paper) 60%, transparent); }
 .waitlist-form {
   display: flex; gap: 0;
   border: 1px solid color-mix(in oklch, var(--paper) 35%, transparent);

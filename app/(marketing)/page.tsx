@@ -186,13 +186,22 @@ export default function LandingPage() {
                         </pattern>
                       </defs>
                       <rect width="240" height="180" fill="url(#p1)" style={{ color: "var(--ink)" }} />
-                      <g transform="translate(28, 36)" fontFamily="IBM Plex Mono" fontSize="11" fill="var(--ink-2)">
-                        <rect x="0" y="0" width="184" height="28" fill="var(--paper)" stroke="var(--rule)" />
-                        <text x="10" y="18">Ե՞րբ պետք է գրանցվել…</text>
-                        <rect x="0" y="36" width="184" height="28" fill="var(--paper)" stroke="var(--rule)" />
-                        <text x="10" y="54" fill="var(--ink-3)">When must I register…</text>
-                        <rect x="0" y="72" width="184" height="28" fill="var(--paper)" stroke="var(--rule)" />
-                        <text x="10" y="90" fill="var(--ink-3)">Когда должен зарегистри…</text>
+                      <g transform="translate(28, 24)" fontFamily="IBM Plex Mono" fontSize="8" fill="var(--ink-2)">
+                        <rect x="0" y="0" width="184" height="36" fill="var(--paper)" stroke="var(--rule)" />
+                        <text x="10" y="14">
+                          <tspan x="10" dy="0">Ե՞րբ է ԱԱՀ գրանցումը</tspan>
+                          <tspan x="10" dy="10">պարտադիր ԱՁ-ի համար</tspan>
+                        </text>
+                        <rect x="0" y="44" width="184" height="36" fill="var(--paper)" stroke="var(--rule)" />
+                        <text x="10" y="58" fill="var(--ink-3)">
+                          <tspan x="10" dy="0">When does VAT registration become</tspan>
+                          <tspan x="10" dy="10">mandatory for a sole proprietor</tspan>
+                        </text>
+                        <rect x="0" y="88" width="184" height="36" fill="var(--paper)" stroke="var(--rule)" />
+                        <text x="10" y="102" fill="var(--ink-3)">
+                          <tspan x="10" dy="0">Когда регистрация по НДС</tspan>
+                          <tspan x="10" dy="10">становится обязательной для ИП</tspan>
+                        </text>
                       </g>
                     </svg>
                   </div>
