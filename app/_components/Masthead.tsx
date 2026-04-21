@@ -1,6 +1,6 @@
 "use client";
 
-import {MouseEvent, useEffect, useMemo, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import {useTranslations} from "next-intl";
 import {Link} from "@/i18n/navigation";
 import { LanguageSwitcher } from "./LanguageSwitcher";
@@ -84,21 +84,28 @@ export function Masthead({ nav, ctaHref = "/#waitlist" }: MastheadProps) {
     setActiveSectionId(targetId);
   };
 
-  const handleNavClick = (e: MouseEvent<HTMLAnchorElement>) => {
-    setMenuOpen(false);
+  useEffect(() => {
+    const onDocumentClick = (event: MouseEvent) => {
+      const target = event.target as HTMLElement | null;
+      const anchor = target?.closest("a");
+      if (!anchor) return;
 
-    const rawHref = e.currentTarget.getAttribute("href");
-    if (!rawHref || !rawHref.includes("#")) return;
+      const rawHref = anchor.getAttribute("href");
+      if (!rawHref || !rawHref.includes("#")) return;
 
-    const url = new URL(rawHref, window.location.href);
-    if (url.pathname !== window.location.pathname || !url.hash) return;
+      const url = new URL(rawHref, window.location.href);
+      if (url.pathname !== window.location.pathname || !url.hash) return;
 
-    const targetId = url.hash.replace("#", "");
-    if (!targetId) return;
+      const targetId = url.hash.replace("#", "");
+      if (!targetId) return;
 
-    e.preventDefault();
-    smoothScrollTo(targetId);
-  };
+      event.preventDefault();
+      smoothScrollTo(targetId);
+    };
+
+    document.addEventListener("click", onDocumentClick);
+    return () => document.removeEventListener("click", onDocumentClick);
+  }, []);
 
   return (
     <header className="masthead">
@@ -126,7 +133,7 @@ export function Masthead({ nav, ctaHref = "/#waitlist" }: MastheadProps) {
               className={
                 item.active || item.href.split("#")[1] === activeSectionId ? "active" : undefined
               }
-              onClick={handleNavClick}
+              onClick={() => setMenuOpen(false)}
             >
               {item.label}
             </Link>
