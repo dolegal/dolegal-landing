@@ -265,7 +265,7 @@ body.product-body { height: 100vh; overflow: hidden; font-size: 15px; }
 .btn-cta {
   background: var(--ink); color: var(--paper); border: 0;
   font-family: var(--sans); font-size: 13px; font-weight: 500;
-  padding: 10px 16px; border-radius: var(--r); cursor: pointer; letter-spacing: 0.01em;
+  padding: 10px 16px; border-radius: 8px; cursor: pointer; letter-spacing: 0.01em;
   transition: background .2s;
   text-decoration: none; display: inline-block;
 }
@@ -355,7 +355,7 @@ body.product-body { height: 100vh; overflow: hidden; font-size: 15px; }
 .btn-primary {
   background: var(--ink); color: var(--paper); border: 0;
   font-family: var(--sans); font-size: 14px; font-weight: 500;
-  padding: 14px 22px; cursor: pointer; border-radius: var(--r); letter-spacing: 0.01em;
+  padding: 14px 22px; cursor: pointer; border-radius: 8px; letter-spacing: 0.01em;
   transition: background .2s, transform .2s;
   text-decoration: none; display: inline-block;
 }
@@ -364,7 +364,7 @@ body.product-body { height: 100vh; overflow: hidden; font-size: 15px; }
   background: transparent; color: var(--ink);
   border: 1px solid var(--rule);
   font-family: var(--sans); font-size: 14px; font-weight: 500;
-  padding: 13px 20px; cursor: pointer; border-radius: var(--r);
+  padding: 13px 20px; cursor: pointer; border-radius: 8px;
   transition: border-color .2s, color .2s;
   text-decoration: none; display: inline-block;
 }
@@ -749,7 +749,7 @@ body.product-body { height: 100vh; overflow: hidden; font-size: 15px; }
 .waitlist-form {
   display: flex; gap: 0;
   border: 1px solid color-mix(in oklch, var(--paper) 35%, transparent);
-  background: transparent; border-radius: var(--r);
+  background: transparent; border-radius: 8px;
   overflow: hidden; margin-top: 24px;
 }
 .waitlist-form input {
