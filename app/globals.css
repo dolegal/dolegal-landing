@@ -805,9 +805,8 @@ body.product-body { height: 100vh; overflow: hidden; font-size: 15px; }
 .foot-col a {
   display: block; font-family: var(--sans); font-size: 13.5px;
   color: var(--ink-2); text-decoration: none; padding: 5px 0;
-  border-top: 1px solid var(--rule-soft);
+  border-top: 0;
 }
-.foot-col a:first-of-type { border-top: 0; }
 .foot-col a:hover { color: var(--accent); }
 .foot-bottom {
   margin-top: 48px; padding-top: 20px;
