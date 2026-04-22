@@ -332,7 +332,7 @@ body.product-body { height: 100vh; overflow: hidden; font-size: 15px; }
   font-variation-settings: "opsz" 60;
   color: var(--ink-2);
 }
-.h-display .amp { font-style: normal; color: var(--accent); font-weight: 400; }
+.h-display .amp { font-style: normal; color: #fff; font-weight: 400; }
 .h-display .small {
   font-size: 24px; font-weight: 400; letter-spacing: -0.02em;
   display: block; color: var(--ink-3); font-style: normal;

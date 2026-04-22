@@ -58,7 +58,7 @@ export default function LandingPage() {
               <h1 className="h-display">
                 {tParity("heroLine1")}<br />
                 {tParity("heroLine2Prefix")} <em>{tParity("heroLine2Emphasis")}</em><br />
-                <span className="amp">{tParity("heroLine3Prefix")}</span> {tParity("heroLine3Rest")}
+                <span className="amp" style={{ color: "#fff" }}>{tParity("heroLine3Prefix")}</span> {tParity("heroLine3Rest")}
                 <span className="small">{tParity("heroLine4")}</span>
               </h1>
               <p className="lede">
