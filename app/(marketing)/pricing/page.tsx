@@ -5,6 +5,7 @@ import { Fragment } from "react";
 import { IssueStrip } from "../../_components/IssueStrip";
 import { Masthead } from "../../_components/Masthead";
 import { Waitlist } from "../../_components/Waitlist";
+import { Footer } from "../../_components/Footer";
 import { FAQList } from "../_components/FAQList";
 import { PlansAndBilling } from "./_components/PlansAndBilling";
 
@@ -13,87 +14,6 @@ export const metadata: Metadata = {
   description:
     "Explore doLegal pricing plans for Armenian legal research and drafting, including token tiers, top-ups, and team options for law and accounting practices.",
 };
-
-const PRICING_FAQ = [
-  {
-    q: "Can I cancel or change plans anytime?",
-    a: "Yes. Upgrades apply immediately with prorated billing, downgrades apply in the next billing cycle, and you can cancel any time. No contracts, no hidden fees.",
-  },
-  {
-    q: "What happens if I run out of tokens?",
-    a: "You can add a one-time top-up (10k / 15k / 25k) to your current cycle without changing plans, or upgrade to a higher tier. Unused top-up tokens roll over for 30 days.",
-  },
-  {
-    q: "Do unused tokens roll over?",
-    a: "Plan tokens reset each cycle. Top-up tokens roll over for 30 days from purchase, so a bad week doesn't cost you the balance you've already paid for.",
-  },
-  {
-    q: "Is VAT included in the quoted prices?",
-    a: "Prices shown are in AMD and exclusive of VAT. For entities registered in Armenia, VAT is added per the RA Tax Code at checkout.",
-  },
-  {
-    q: "How does the Rocket team plan work?",
-    a: "Rocket gives a 2–10 person practice a shared 1,000,000 token pool, seat-based admin, and dedicated support. Larger firms should contact us for a custom plan.",
-  },
-  {
-    q: "When is pricing actually available?",
-    a: "doLegal is in early access. Pricing shown is the planned launch pricing. Join the waitlist and we'll invite you in batches as we open access — starting with independent practitioners in Yerevan.",
-  },
-];
-
-const TOPUPS = [
-  {
-    num: "1",
-    tokens: "10,000",
-    note: "≈ 7,500 words of research output",
-    price: "4,000",
-  },
-  {
-    num: "2",
-    tokens: "15,000",
-    note: "≈ 11,000 words · good for one long drafting session",
-    price: "6,000",
-  },
-  {
-    num: "3",
-    tokens: "25,000",
-    note: "≈ 18,500 words · covers a week of heavy use",
-    price: "10,000",
-  },
-];
-
-const TOKEN_EX = [
-  {
-    n: "1",
-    what: "A short legal question with a short answer.",
-    note: "“When is VAT registration mandatory?”",
-    cost: "≈ 500–1,500",
-  },
-  {
-    n: "2",
-    what: "A longer answer with extensive citations.",
-    note: "Tax filing calendar, cross-referenced",
-    cost: "≈ 2,000–4,000",
-  },
-  {
-    n: "3",
-    what: "Contract draft from a prompt.",
-    note: "NDA, employment, service agreement",
-    cost: "≈ 6,000–12,000",
-  },
-  {
-    n: "4",
-    what: "Document comparison (upload two PDFs).",
-    note: "Redline with article mapping",
-    cost: "≈ 10,000–20,000",
-  },
-  {
-    n: "5",
-    what: "Full case review (upload + Q&A thread).",
-    note: "Uploaded judgment + 5–10 questions",
-    cost: "≈ 15,000–35,000",
-  },
-];
 
 /* ============ Compare table data ============ */
 type Cell =
@@ -115,62 +35,64 @@ interface CompareGroup {
   rows: CompareRow[];
 }
 
-const COMPARE_GROUPS: CompareGroup[] = [
-  {
-    head: "§ Usage",
-    rows: [
-      {
-        label: "Monthly tokens",
-        values: [txt("1,400"), txt("40,000"), txt("250,000"), txt("1,000,000")],
-      },
-      { label: "Guest trial queries", values: [txt("8"), dash, dash, dash] },
-      {
-        label: "File upload size",
-        values: [dash, txt("5 MB"), txt("10 MB"), txt("25 MB")],
-      },
-      {
-        label: "Pinned conversations",
-        values: [txt("1"), txt("3"), txt("5"), txt("Unlimited")],
-      },
-      {
-        label: "Full chat history",
-        values: [dash, dash, check, check],
-      },
-    ],
-  },
-  {
-    head: "§ Research",
-    rows: [
-      {
-        label: "Retrieval over Armenian legal corpora",
-        values: [check, check, check, check],
-      },
-      { label: "Article-level citations", values: [check, check, check, check] },
-      { label: "Weekly corpus refresh", values: [check, check, check, check] },
-      { label: "Priority AI response", values: [dash, dash, check, check] },
-    ],
-  },
-  {
-    head: "§ Drafting",
-    rows: [
-      { label: "Document drafting", values: [dash, check, check, check] },
-      { label: "DOCX export", values: [dash, check, check, check] },
-      { label: "Document comparison", values: [dash, dash, check, check] },
-      { label: "OCR of scanned documents", values: [dash, check, check, check] },
-    ],
-  },
-  {
-    head: "§ Team & support",
-    rows: [
-      { label: "Shared token pool", values: [dash, dash, dash, check] },
-      { label: "Dedicated support", values: [dash, dash, dash, check] },
-      {
-        label: "Onboarding session",
-        values: [dash, dash, txt("Group"), txt("1-on-1")],
-      },
-    ],
-  },
-];
+function getCompareGroups(tPricing: ReturnType<typeof useTranslations>): CompareGroup[] {
+  return [
+    {
+      head: tPricing("compare.usage.head"),
+      rows: [
+        {
+          label: tPricing("compare.usage.monthlyTokens"),
+          values: [txt("1,400"), txt("40,000"), txt("250,000"), txt("1,000,000")],
+        },
+        { label: tPricing("compare.usage.guestTrialQueries"), values: [txt("8"), dash, dash, dash] },
+        {
+          label: tPricing("compare.usage.fileUploadSize"),
+          values: [dash, txt("5 MB"), txt("10 MB"), txt("25 MB")],
+        },
+        {
+          label: tPricing("compare.usage.pinnedConversations"),
+          values: [txt("1"), txt("3"), txt("5"), txt(tPricing("compare.values.unlimited"))],
+        },
+        {
+          label: tPricing("compare.usage.fullChatHistory"),
+          values: [dash, dash, check, check],
+        },
+      ],
+    },
+    {
+      head: tPricing("compare.research.head"),
+      rows: [
+        {
+          label: tPricing("compare.research.retrieval"),
+          values: [check, check, check, check],
+        },
+        { label: tPricing("compare.research.articleCitations"), values: [check, check, check, check] },
+        { label: tPricing("compare.research.weeklyRefresh"), values: [check, check, check, check] },
+        { label: tPricing("compare.research.priorityResponse"), values: [dash, dash, check, check] },
+      ],
+    },
+    {
+      head: tPricing("compare.drafting.head"),
+      rows: [
+        { label: tPricing("compare.drafting.documentDrafting"), values: [dash, check, check, check] },
+        { label: tPricing("compare.drafting.docxExport"), values: [dash, check, check, check] },
+        { label: tPricing("compare.drafting.documentComparison"), values: [dash, dash, check, check] },
+        { label: tPricing("compare.drafting.ocr"), values: [dash, check, check, check] },
+      ],
+    },
+    {
+      head: tPricing("compare.team.head"),
+      rows: [
+        { label: tPricing("compare.team.sharedPool"), values: [dash, dash, dash, check] },
+        { label: tPricing("compare.team.dedicatedSupport"), values: [dash, dash, dash, check] },
+        {
+          label: tPricing("compare.team.onboarding"),
+          values: [dash, dash, txt(tPricing("compare.values.group")), txt(tPricing("compare.values.oneOnOne"))],
+        },
+      ],
+    },
+  ];
+}
 
 const FEATURED_COL = 2; // Pro
 
@@ -207,12 +129,11 @@ export default function PricingPage() {
   const tNav = useTranslations("nav");
   const tP = useTranslations("landing.pricingParity");
   const tPricing = useTranslations("landing.pricing");
-  
-  // Dynamic PRICING_FAQ from JSON
-  const dynamicFAQ = [0, 1].map(i => ({
-    q: tP.raw(`q${i + 1}Title`),
-    a: tP.raw(`q${i + 1}Answer`)
-  }));
+  const compareGroups = getCompareGroups(tPricing);
+  const pricingFaq = [0, 1, 2, 3, 4, 5].map((i) => tPricing.raw(`faq.${i}`));
+  const topups = [0, 1, 2].map((i) => tPricing.raw(`topupsDetailed.${i}`));
+  const tokenExamples = [0, 1, 2, 3, 4].map((i) => tPricing.raw(`tokenExamples.${i}`));
+  const planNames = [0, 1, 2, 3].map((i) => tPricing.raw(`plans.${i}.name`)) as string[];
   const NAV = [
     { href: "/#features", label: tNav("features") },
     { href: "/#how", label: tNav("howItWorks") },
@@ -240,16 +161,16 @@ export default function PricingPage() {
           </p>
           <div className="meta-row">
             <span>
-              Currency · <b>AMD</b>
+              {tPricing("meta.currencyLabel")} · <b>{tPricing("meta.currencyValue")}</b>
             </span>
             <span>
-              Billing · <b>Monthly</b>
+              {tPricing("meta.billingLabel")} · <b>{tPricing("meta.billingValue")}</b>
             </span>
             <span>
-              Tokens reset · <b>Every 30 days</b>
+              {tPricing("meta.tokensResetLabel")} · <b>{tPricing("meta.tokensResetValue")}</b>
             </span>
             <span>
-              Early-access · <b>Waitlist only</b>
+              {tPricing("meta.earlyAccessLabel")} · <b>{tPricing("meta.earlyAccessValue")}</b>
             </span>
           </div>
         </div>
@@ -276,18 +197,18 @@ export default function PricingPage() {
               </p>
             </div>
             <div className="topup-table">
-              {TOPUPS.map((t) => (
+              {topups.map((t: any) => (
                 <div className="topup-row" key={t.num}>
                   <span className="num">{t.num}</span>
                   <span className="tok">
-                    {t.tokens} <em>tokens</em>
+                    {t.tokens} <em>{tPricing("tokensUnit")}</em>
                   </span>
                   <span className="eff">{t.note}</span>
                   <span className="price">
                     AMD&nbsp;<b>{t.price}</b>
                   </span>
                   <Link className="topup-cta" href="/#waitlist">
-                    Add top-up →
+                    {t.cta}
                   </Link>
                 </div>
               ))}
@@ -325,21 +246,21 @@ export default function PricingPage() {
                 <tr>
                   <th />
                   <th className="plan-head">
-                    Free<span className="sub">AMD 0</span>
+                    {planNames[0]}<span className="sub">AMD 0</span>
                   </th>
                   <th className="plan-head">
-                    Basic<span className="sub">AMD 8,000</span>
+                    {planNames[1]}<span className="sub">AMD 8,000</span>
                   </th>
                   <th className="plan-head feat">
-                    Pro<span className="sub">AMD 15,000</span>
+                    {planNames[2]}<span className="sub">AMD 15,000</span>
                   </th>
                   <th className="plan-head">
-                    Rocket<span className="sub">AMD 25,000</span>
+                    {planNames[3]}<span className="sub">AMD 25,000</span>
                   </th>
                 </tr>
               </thead>
               <tbody>
-                {COMPARE_GROUPS.map((g) => (
+                {compareGroups.map((g) => (
                   <Fragment key={g.head}>
                     <tr>
                       <td colSpan={5} className="group-head">
@@ -367,24 +288,21 @@ export default function PricingPage() {
         <div className="wrap">
           <div className="howtokens-grid">
             <div>
-              <p className="eyebrow">Unit economics</p>
+              <p className="eyebrow">{tPricing("tokenSection.eyebrow")}</p>
               <h2>
-                A token, <em>loosely speaking.</em>
+                {tPricing("tokenSection.titleMain")} <em>{tPricing("tokenSection.titleAccent")}</em>
               </h2>
               <p className="lead">
-                A token is the unit of AI processing — roughly{" "}
-                <b>0.75 words</b>. Your plan refreshes a fixed allowance
-                monthly; top-ups stack on top. Here is what typical doLegal work
-                costs.
+                {tPricing("tokenSection.description")}
               </p>
             </div>
             <div className="token-examples">
-              {TOKEN_EX.map((t, i) => (
+              {tokenExamples.map((t: any, i) => (
                 <div
                   className="token-ex"
                   key={t.n}
                   style={
-                    i === TOKEN_EX.length - 1 ? { borderBottom: 0 } : undefined
+                    i === tokenExamples.length - 1 ? { borderBottom: 0 } : undefined
                   }
                 >
                   <span className="n">{t.n}</span>
@@ -394,7 +312,7 @@ export default function PricingPage() {
                   </span>
                   <span className="cost">
                     <b>{t.cost}</b>
-                    <em>tokens</em>
+                    <em>{tPricing("tokensUnit")}</em>
                   </span>
                 </div>
               ))}
@@ -412,26 +330,25 @@ export default function PricingPage() {
             <br />
             <em>{tP("questionsTitleAccent")}</em>
           </h2>
-          {/* using fallback to static FAQ for missing translations, plus translated ones */}
-          <FAQList items={[...dynamicFAQ, ...PRICING_FAQ.slice(2)]} togglePlusMinus />
+          <FAQList items={pricingFaq as Array<{ q: string; a: string }>} togglePlusMinus />
         </div>
       </section>
 
       <Waitlist
         heading={
           <>
-            Join the waitlist.
+            {tPricing("waitlist.headingMain")}
             <br />
-            <em>Lock in launch pricing.</em>
+            <em>{tPricing("waitlist.headingAccent")}</em>
           </>
         }
         body={
           <>
-            doLegal is not publicly released. Early-access invitees get the
-            launch tariff grandfathered for 12 months after general availability.
+            {tPricing("waitlist.body")}
           </>
         }
       />
+      <Footer />
     </>
   );
 }
