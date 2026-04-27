@@ -120,6 +120,8 @@ function useLiveDemos(t: ReturnType<typeof useTranslations>) {
 export function LiveDemo() {
   const t = useTranslations("landing.parity");
   const demos = useLiveDemos(t);
+  const sourcesVerifiedLabel = t("demoSourcesVerified");
+  const sourcesVerifiedText = sourcesVerifiedLabel.replace(/\s*✓\s*$/, "").trim();
 
   const [active, setActive] = useState<DemoKey>("vat");
   const [expandedCite, setExpandedCite] = useState<string | null>(null);
@@ -222,9 +224,12 @@ export function LiveDemo() {
 
                       <div className="citations">
                         <div className="citations-title">
-                          <span>{t("demoCitationsTitle")}</span>
                           <span style={{ color: "var(--accent)" }}>
-                            {t("demoSourcesVerified")}
+                            {t("demoCitationsTitle")}
+                          </span>
+                          <span>
+                            <span style={{ color: "var(--ink-3)" }}>{sourcesVerifiedText}</span>{" "}
+                            <span style={{ color: "var(--accent)" }}>✓</span>
                           </span>
                         </div>
                         {demo.cites.map((c, i) => {

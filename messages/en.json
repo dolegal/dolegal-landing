@@ -7,209 +7,22 @@
     "faq": "FAQ",
     "earlyAccess": "Join Early Access →"
   },
-  "hero": {
-    "joinEarlyAccess": "Join Early Access →",
-    "seeProduct": "See how it works ↗"
-  },
   "language": {
     "ariaLabel": "Language"
   },
   "landing": {
-    "navigationLinks": [
-      {
-        "href": "#features",
-        "label": "Features"
-      },
-      {
-        "href": "#how",
-        "label": "How it works"
-      },
-      {
-        "href": "#who",
-        "label": "Audience"
-      },
-      {
-        "href": "/pricing",
-        "label": "Pricing"
-      },
-      {
-        "href": "#faq",
-        "label": "FAQ"
-      }
-    ],
     "hero": {
-      "titleMain": "Legal AI-assistant",
-      "titleFor": "Exponential efficiency",
-      "titleAudienceRotating": [],
-      "description": "Forward-thinking founders, top lawyers, accountants, clerks, and other professionals simplify and speed up their daily work with doLegal.",
-      "primaryCta": "Join Early Access",
-      "secondaryCta": "See how it works",
-      "onlineStatus": "Online",
-      "previewBadge": "Example",
-      "previewQuestionLabel": "Question",
-      "previewAnswerLabel": "Answer",
-      "previewDocumentLabel": "Document",
-      "previewAttachmentLabel": "Context",
-      "previewAttachmentIdle": "Add PDF or Word — we read it alongside your question",
-      "previewDropzoneIdle": "Drop PDF or DOCX to analyze",
-      "previewDropzoneFormats": "PDF · DOCX · up to 10 MB",
-      "previewAnalyzing": "Analyzing…",
-      "previewAnalyzeDetail": "Checking clauses against RA law",
-      "previewAnalyzedFile": "employment_contract.pdf",
-      "previewExportLabel": "Download",
-      "previewExportPdfName": "service_agreement.pdf",
-      "previewExportDocxName": "service_agreement.docx",
-      "previewSend": "Send",
-      "previewSourcesLabel": "Legal sources",
-      "previewWaitingQuestion": "Your question appears once context is ready…",
-      "askPlaceholder": "Ask about Armenian law...",
       "previewUseCases": [
         {
-          "withAttachment": true,
-          "question": "What is the deadline to register an employee in the tax system after starting operations?",
-          "answerTitle": "Conclusion",
-          "answerBody": "You should register the employee within 3 working days after the employment relationship starts. The same window applies for social-security and personal-income-tax enrolment with the SRC.",
-          "citations": [
-            {
-              "instrument": "RA LC",
-              "locator": "Art. 88 · employer registration duties",
-              "note": "Three working days from the start of employment; tied to tax and social-payment obligations."
-            },
-            {
-              "instrument": "RA Gov.Dec. 23-N",
-              "locator": "§§ 2–3 · employee registration procedure",
-              "note": "Forms and deadlines for notifying the State Revenue Committee."
-            },
-            {
-              "instrument": "RA TC",
-              "locator": "Arts. 65–66 · registration of taxpayers",
-              "note": "Personal income tax registration for employees and related filing hooks."
-            }
-          ],
-          "tags": [
-            "RA Labor Code",
-            "SRC registration",
-            "Gov. 23-N"
-          ]
+          "withAttachment": true
         },
         {
-          "withExport": true,
-          "question": "Draft a service agreement for my company",
-          "answerTitle": "Service agreement ready",
-          "answerBody": "Generating a service agreement aligned with the RA Civil Code — including pricing, payment terms, liability caps, and termination — with headings mapped to mandatory notice and defect-remedy rules.",
-          "citations": [
-            {
-              "instrument": "RA CC",
-              "locator": "Arts. 435–447 · service / work contracts",
-              "note": "Core obligations, acceptance, and remedies for non-conforming performance."
-            },
-            {
-              "instrument": "RA CC",
-              "locator": "Arts. 314–318 · price, payment, interest",
-              "note": "Price determination, due dates, and late-payment context."
-            },
-            {
-              "instrument": "RA CC",
-              "locator": "Arts. 476–477 · limitation of liability",
-              "note": "Permissible scope of liability clauses in B2B service deals."
-            }
-          ],
-          "exportPdfName": "service_agreement.pdf",
-          "exportDocxName": "service_agreement.docx"
+          "withExport": true
         },
         {
-          "question": "When must I register for VAT as an individual entrepreneur in Armenia?",
-          "answerTitle": "Summary",
-          "answerBody": "VAT registration is required once turnover crosses the statutory threshold in any rolling 12-month period; invoicing and filing then follow the RA Tax Code and e-invoicing rules.",
-          "citations": [
-            {
-              "instrument": "RA TC",
-              "locator": "Art. 267 · VAT registration threshold",
-              "note": "Mandatory registration after the turnover test; voluntary below threshold in permitted cases."
-            },
-            {
-              "instrument": "RA TC",
-              "locator": "Arts. 268–271 · VAT payer obligations",
-              "note": "Invoices, rates, and reporting periods once registered."
-            },
-            {
-              "instrument": "RA Gov. (e-invoicing)",
-              "locator": "Annex · electronic invoice format",
-              "note": "Technical rules for VAT invoices in the national system."
-            }
-          ],
-          "tags": [
-            "RA Tax Code",
-            "VAT",
-            "e-invoicing"
-          ]
-        },
-        {
-          "withExport": true,
-          "question": "Draft a commercial lease for office space in Yerevan",
-          "answerTitle": "Lease draft ready",
-          "answerBody": "Generating a commercial lease with rent indexation, OPEX/CAM allocation, permitted use, subletting rules, and handover condition — structured under the Civil Code lease chapter.",
-          "citations": [
-            {
-              "instrument": "RA CC",
-              "locator": "Arts. 583–618 · lease of buildings and premises",
-              "note": "Rent, maintenance, repairs, and return condition."
-            },
-            {
-              "instrument": "RA CC",
-              "locator": "Arts. 401–405 · term, renewal, termination",
-              "note": "Notice and exit mechanics for fixed and rolling terms."
-            },
-            {
-              "instrument": "RA CC",
-              "locator": "Art. 418 · transfer of risk",
-              "note": "Useful for insurance and damage allocation in office leases."
-            }
-          ],
-          "exportPdfName": "commercial_lease.pdf",
-          "exportDocxName": "commercial_lease.docx"
-        },
-        {
-          "question": "What notice period applies when terminating an indefinite-term employment contract?",
-          "answerTitle": "Conclusion",
-          "answerBody": "Notice periods depend on who initiates and on valid grounds: the Labor Code sets minimum notice for employer-initiated ordinary dismissals and shorter paths for serious misconduct, probation expiry, or mutual consent.",
-          "citations": [
-            {
-              "instrument": "RA LC",
-              "locator": "Art. 113 · notice on termination by employer",
-              "note": "Minimum calendar-day notice unless a separate ground applies."
-            },
-            {
-              "instrument": "RA LC",
-              "locator": "Arts. 81, 84 · immediate dismissal grounds",
-              "note": "No notice when misconduct or certain statutory breaches are proven under procedure."
-            },
-            {
-              "instrument": "RA LC",
-              "locator": "Art. 120 · employee resignation",
-              "note": "Employee’s notice when leaving on ordinary resignation."
-            }
-          ],
-          "tags": [
-            "RA Labor Code",
-            "Notice",
-            "Termination"
-          ]
+          "withExport": true
         }
-      ],
-      "chat": {
-        "userQuestion1": "What is the deadline to register an employee in the tax system after starting operations?",
-        "assistantConclusionText": "You should register the employee within 3 working days after the employment relationship starts.",
-        "assistantConclusionTitle": "Conclusion",
-        "assistantConclusionTags": [
-          "RA Labor Code, Art. 88",
-          "Official registry",
-          "RA Gov. Decree 23-N"
-        ],
-        "userQuestion2": "Draft a service agreement for my company",
-        "assistantDraftTitle": "Service agreement ready",
-        "assistantDraftText": "Generating a service agreement aligned with the RA Civil Code — including pricing, payment terms, liability, and termination clauses..."
-      }
+      ]
     },
     "heroStats": [
       {
@@ -229,7 +42,6 @@
       "sectionLabel": "The problem",
       "titleMain": "Legal research in Armenia",
       "titleAccent": "stuck in 2005",
-      "description": "The official sources exist, but the tools to use them efficiently do not. Until now.",
       "oldWayBadge": "The old way",
       "withDoLegalBadge": "With doLegal",
       "oldWayItems": [
@@ -248,9 +60,6 @@
       ]
     },
     "features": {
-      "sectionLabel": "Core capabilities",
-      "titleMain": "Three tools.",
-      "titleAccent": "One interface.",
       "description": "doLegal combines legal research, document drafting, and legal assistant guidance - all powered by authoritative legal corpora.",
       "cards": [
         {
@@ -292,9 +101,6 @@
       ]
     },
     "howItWorks": {
-      "sectionLabel": "How it works",
-      "titleMain": "From questions to",
-      "titleAccent": "verified answers",
       "steps": [
         {
           "title": "Ask in your language",
@@ -310,7 +116,14 @@
         }
       ],
       "illustrations": {
-        "lawSources": ["RA CC", "RA TC", "RA LC", "GOV.DEC", "SRC ORD", "COURT"],
+        "lawSources": [
+          "RA CC",
+          "RA TC",
+          "RA LC",
+          "GOV.DEC",
+          "SRC ORD",
+          "COURT"
+        ],
         "answerLabel": "ANSWER",
         "citations": {
           "sources": "SOURCES",
@@ -326,9 +139,6 @@
       }
     },
     "personas": {
-      "sectionLabel": "Who uses doLegal",
-      "titleMain": "Built for legal and accounting professionals, ambitious founders",
-      "titleAccent": "and ambitious founders",
       "cards": [
         {
           "tag": "Solo practitioners",
@@ -465,7 +275,7 @@
           "head": "§ Research",
           "retrieval": "Retrieval over Armenian legal corpora",
           "articleCitations": "Article-level citations",
-          "weeklyRefresh": "Monthly corpus refresh",
+          "monthlyRefresh": "Monthly corpus refresh",
           "priorityResponse": "Priority AI response"
         },
         "drafting": {
@@ -658,26 +468,9 @@
             }
           ]
         }
-      ],
-      "topups": [
-        {
-          "tokens": "10,000 tokens",
-          "price": "AMD 4,000"
-        },
-        {
-          "tokens": "15,000 tokens",
-          "price": "AMD 6,000"
-        },
-        {
-          "tokens": "25,000 tokens",
-          "price": "AMD 10,000"
-        }
       ]
     },
     "faq": {
-      "sectionLabel": "FAQ",
-      "titleMain": "Common",
-      "titleAccent": "questions",
       "descriptionPrefix": "Still have questions? Write to us at",
       "email": "hello@dolegal.am",
       "items": [
@@ -687,7 +480,7 @@
         },
         {
           "question": "How accurate are the citations?",
-          "answer": "Every response is grounded in retrieved text from official government legislation sources. We target high citation alignment on monthly sample audits."
+          "answer": "Every response is grounded in text retrieved from official legislation sources. We aim for maximum citation accuracy based on regular updates."
         },
         {
           "question": "What languages does doLegal support?",
@@ -708,14 +501,8 @@
       "titleMain": "Join the early access",
       "titleAccent": "for doLegal",
       "description": "The product is not publicly released yet. Join the waitlist and get invited as soon as we open access.",
-      "emailLabel": "Email Address",
       "emailPlaceholder": "you@company.com",
       "buttonLabel": "Join Early Access",
-      "submittingButtonLabel": "Submitting...",
-      "submittingMessage": "Submitting your request...",
-      "successMessage": "Thanks! You have been added to the early access list.",
-      "duplicateMessage": "This email is already on the early access list.",
-      "errorMessage": "We could not submit your request. Please try again in a moment.",
       "footnote": "Early access list only - Invitations sent in batches"
     },
     "footer": {
@@ -773,17 +560,13 @@
       "demoQuestion": "When must I register for VAT as an individual entrepreneur in Armenia?",
       "demoAssistantLabel": "doLegal",
       "demoAnswer": "VAT registration becomes mandatory once turnover crosses the statutory threshold in any rolling 12-month period.",
-      "demoSourcesVerified": "verified ↗",
-      "demoSource1": "[01] RA TC · Art. 267",
-      "demoSource2": "[02] RA TC · Arts. 268–271",
-      "demoSource3": "[03] SRC Ord. N-148",
+      "demoSourcesVerified": "verified ✓",
       "demoInputPlaceholder": "Ask a question in Armenian, Russian, or English…",
       "demoCitationsTitle": "Legal sources",
       "demoChromeMiddle": "doLegal / research",
       "demoNote": "↑ Live preview · switch questions above",
       "demoComposerLang": "EN",
       "demoUserShort": "ME",
-      "demoViewSource": "View ↗",
       "demoVatBody1H": "Reasoning",
       "demoVatBody1P": "Armenia's Tax Code sets a turnover-based VAT threshold measured across any 12 consecutive months, not a calendar year. On crossing it, the taxpayer becomes a VAT payer from the next transaction onward and takes on the full package of invoicing, reporting, and e-filing duties.",
       "demoVatBody2H": "What to do next",
@@ -849,34 +632,9 @@
       "comparisonLabel": "Full comparison",
       "comparisonTitleMain": "What you get",
       "comparisonTitleAccent": "in each chamber.",
-      "tableFeature": "Feature",
-      "tableMonthlyTokens": "Monthly tokens",
-      "tableDocumentDrafting": "Document drafting",
-      "tableDocumentComparison": "Document comparison",
       "questionsLabel": "Pricing questions",
       "questionsTitleMain": "Before you",
-      "questionsTitleAccent": "pick a tier.",
-      "q1Title": "Can I cancel or change plans anytime?",
-      "q1Answer": "Yes. Upgrades apply immediately with prorated billing, downgrades apply in the next billing cycle.",
-      "q2Title": "What happens if I run out of tokens?",
-      "q2Answer": "You can add a one-time top-up or upgrade to a higher tier."
-    },
-    "prototypeParity": {
-      "topbar": "Workspace / Research / VAT registration threshold · 620k / 1M · Rocket",
-      "newResearch": "+ New research ⌘K",
-      "tools": "Tools",
-      "toolResearch": "Legal research",
-      "toolDrafting": "Document drafting",
-      "toolAssistant": "Legal assistant",
-      "workspaceTitle": "Research workspace",
-      "workspaceMeta": "Live corpus · 3 sources · EN",
-      "source1": "[01] RA TC - Art. 267",
-      "source2": "[02] RA TC - Arts. 268-271",
-      "source3": "[03] SRC Ord. N-148",
-      "askButton": "Ask",
-      "topSource": "Top source",
-      "articleTitle": "RA TAX CODE · ARTICLE 267",
-      "articleBody": "A taxable person whose aggregate turnover exceeds the threshold in any twelve consecutive months is deemed to be a VAT payer."
+      "questionsTitleAccent": "pick a tier."
     }
   }
 }

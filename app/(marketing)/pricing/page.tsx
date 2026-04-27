@@ -67,7 +67,7 @@ function getCompareGroups(tPricing: ReturnType<typeof useTranslations>): Compare
           values: [check, check, check, check],
         },
         { label: tPricing("compare.research.articleCitations"), values: [check, check, check, check] },
-        { label: tPricing("compare.research.weeklyRefresh"), values: [check, check, check, check] },
+        { label: tPricing("compare.research.monthlyRefresh"), values: [check, check, check, check] },
         { label: tPricing("compare.research.priorityResponse"), values: [dash, dash, check, check] },
       ],
     },
