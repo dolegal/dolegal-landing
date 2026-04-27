@@ -590,7 +590,7 @@ body.product-body { height: 100vh; overflow: hidden; font-size: 15px; }
   font-family: var(--sans); font-size: 12px; font-weight: 600;
   display: grid; place-items: center; flex-shrink: 0;
 }
-.avatar.ai { background: var(--accent); color: var(--paper); font-family: var(--serif); font-style: italic; font-size: 15px; padding-top: 1px; }
+.avatar.ai { background: var(--accent); color: var(--paper); font-family: var(--serif); font-size: 12px; padding-top: 0; letter-spacing: -0.04em; }
 .msg-content { flex: 1; min-width: 0; }
 .msg-label {
   font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase;

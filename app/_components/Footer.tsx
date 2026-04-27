@@ -1,5 +1,6 @@
 import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
+import { brandText } from "@/lib/brand-text";
 
 export function Footer() {
   const t = useTranslations("landing.footer");
@@ -13,7 +14,7 @@ export function Footer() {
             <div className="foot-brand">
               <img className="brand-logo" src="/doLegal-logo.svg" alt="doLegal" />
             </div>
-            <p className="foot-tag">{t("description")}</p>
+            <p className="foot-tag">{brandText(t("description"))}</p>
           </div>
           <div className="foot-col">
             <h5>{cols[0].title}</h5>
@@ -29,7 +30,7 @@ export function Footer() {
           </div>
         </div>
         <div className="foot-bottom">
-          <span>{t("copyright")}</span>
+          <span>{brandText(t("copyright"))}</span>
         </div>
       </div>
     </footer>

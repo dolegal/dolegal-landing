@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import {getTranslations} from "next-intl/server";
 import { Footer } from "../../_components/Footer";
 import { Masthead } from "../../_components/Masthead";
+import { brandText } from "@/lib/brand-text";
 
 type SupportedLocale = "en" | "ru" | "am";
 
@@ -374,12 +375,12 @@ export default async function LocalizedTermsPage({
             <section key={section.heading} style={{ marginTop: 24 }}>
               <h2>{section.heading}</h2>
               {section.paragraphs?.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
+                <p key={paragraph}>{brandText(paragraph)}</p>
               ))}
               {section.bullets ? (
                 <ul>
                   {section.bullets.map((bullet) => (
-                    <li key={bullet}>{bullet}</li>
+                    <li key={bullet}>{brandText(bullet)}</li>
                   ))}
                 </ul>
               ) : null}

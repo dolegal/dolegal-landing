@@ -2,6 +2,7 @@
 
 import {Link} from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
+import { brandText } from "@/lib/brand-text";
 import { useMemo, useState } from "react";
 
 type PlanId = "free" | "basic" | "pro" | "rocket";
@@ -111,7 +112,7 @@ export function PlansAndBilling() {
                 <span>{lp.kicker}</span>
               </div>
               <h3>{lp.name}</h3>
-              <p className="desc">{lp.desc}</p>
+              <p className="desc">{brandText(lp.desc)}</p>
               <div className="price">
                 <span className="cur">AMD</span>
                 <span className="amt">{amounts[i]}</span>
@@ -119,7 +120,7 @@ export function PlansAndBilling() {
                   {period === "annual" ? tP("billedYearly") : tPricing("monthlyShort")}
                 </span>
               </div>
-              <p className="price-note">{lp.priceNote}</p>
+              <p className="price-note">{brandText(lp.priceNote)}</p>
               <Link
                 className={`plan-cta${isFeat ? "" : " ghost"}`}
                 href="/#waitlist"
@@ -130,7 +131,7 @@ export function PlansAndBilling() {
               <ul className="feat-list">
                 {lp.features.map((f, idx) => (
                   <li key={idx} className={!f.enabled ? "off" : undefined}>
-                    <span>{f.text}</span>
+                    <span>{brandText(f.text)}</span>
                   </li>
                 ))}
               </ul>

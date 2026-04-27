@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import {useTranslations} from "next-intl";
 import { Footer } from "../../_components/Footer";
 import { Masthead } from "../../_components/Masthead";
+import { brandText } from "@/lib/brand-text";
 
 export const metadata: Metadata = {
   title: "Terms of Service | doLegal",
@@ -29,30 +30,32 @@ export default function TermsOfServicePage() {
             Terms of <em>Service</em>
           </h1>
           <p className="section-sub" style={{ fontWeight: 700 }}>
-            Last updated: April 22, 2026. These Terms govern access to and use of doLegal.
+            {brandText(
+              "Last updated: April 22, 2026. These Terms govern access to and use of doLegal.",
+            )}
           </p>
 
         <section style={{ marginTop: 32 }}>
           <h2>1. Operator and acceptance</h2>
           <p>
-            These Terms are between you and <strong>[LEGAL ENTITY NAME]</strong> (doLegal, we, us,
-            our), a company registered in <strong>Republic of Armenia</strong> with
-            registered address at <strong>[REGISTERED ADDRESS]</strong>. By accessing or using
-            doLegal, you agree to these Terms. If you use doLegal on behalf of an organization,
-            you confirm you have authority to bind that organization.
+            These Terms are between you and <strong>[LEGAL ENTITY NAME]</strong>{" "}
+            {brandText(
+              "(doLegal, we, us, our), a company registered in the Republic of Armenia with registered address at [REGISTERED ADDRESS]. By accessing or using doLegal, you agree to these Terms. If you use doLegal on behalf of an organization, you confirm you have authority to bind that organization.",
+            )}
           </p>
         </section>
 
         <section style={{ marginTop: 24 }}>
           <h2>2. Service description</h2>
           <p>
-            doLegal is a subscription-based software service for Armenian legal and tax research,
-            document drafting, and related productivity workflows. Features may include AI-assisted
-            answers, article-level citations, drafting tools, file upload, and export features.
+            {brandText(
+              "doLegal is a subscription-based software service for Armenian legal and tax research, document drafting, and related productivity workflows. Features may include AI-assisted answers, article-level citations, drafting tools, file upload, and export features.",
+            )}
           </p>
           <p>
-            doLegal is an information and drafting tool, not a law firm and not a substitute for
-            professional legal advice. You remain responsible for reviewing outputs and decisions.
+            {brandText(
+              "doLegal is an information and drafting tool, not a law firm and not a substitute for professional legal advice. You remain responsible for reviewing outputs and decisions.",
+            )}
           </p>
         </section>
 
@@ -127,9 +130,9 @@ export default function TermsOfServicePage() {
         <section style={{ marginTop: 24 }}>
           <h2>9. Intellectual property</h2>
           <p>
-            doLegal, including software, branding, and platform content (excluding your submitted
-            content and third-party public legal texts), is owned by us or our licensors and
-            protected by applicable intellectual property laws.
+            {brandText(
+              "doLegal, including software, branding, and platform content (excluding your submitted content and third-party public legal texts), is owned by us or our licensors and protected by applicable intellectual property laws.",
+            )}
           </p>
         </section>
 
@@ -164,8 +167,9 @@ export default function TermsOfServicePage() {
         <section style={{ marginTop: 24 }}>
           <h2>13. Indemnification</h2>
           <p>
-            You agree to defend, indemnify, and hold harmless doLegal from claims arising out of
-            your use of the service, your content, or your breach of these Terms.
+            {brandText(
+              "You agree to defend, indemnify, and hold harmless doLegal from claims arising out of your use of the service, your content, or your breach of these Terms.",
+            )}
           </p>
         </section>
 

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import {useTranslations} from "next-intl";
 import {Link} from "@/i18n/navigation";
+import { brandText } from "@/lib/brand-text";
 import { Fragment } from "react";
 import { IssueStrip } from "../../_components/IssueStrip";
 import { Masthead } from "../../_components/Masthead";
@@ -157,7 +158,7 @@ export default function PricingPage() {
             <em>{tPricing("titleAccent")}</em>
           </h1>
           <p className="lede">
-            {tPricing("description")}
+            {brandText(tPricing("description"))}
           </p>
           <div className="meta-row">
             <span>
@@ -193,7 +194,7 @@ export default function PricingPage() {
                 {tPricing("needsMoreTokensTitle")}
               </h2>
               <p className="descr">
-                {tPricing("needsMoreTokensDescription")}
+                {brandText(tPricing("needsMoreTokensDescription"))}
               </p>
             </div>
             <div className="topup-table">
@@ -203,12 +204,12 @@ export default function PricingPage() {
                   <span className="tok">
                     {t.tokens} <em>{tPricing("tokensUnit")}</em>
                   </span>
-                  <span className="eff">{t.note}</span>
+                  <span className="eff">{brandText(t.note)}</span>
                   <span className="price">
                     AMD&nbsp;<b>{t.price}</b>
                   </span>
                   <Link className="topup-cta" href="/#waitlist">
-                    {t.cta}
+                    {brandText(t.cta)}
                   </Link>
                 </div>
               ))}
@@ -269,7 +270,7 @@ export default function PricingPage() {
                     </tr>
                     {g.rows.map((r) => (
                       <tr key={`${g.head}-${r.label}`}>
-                        <td className="row-label">{r.label}</td>
+                        <td className="row-label">{brandText(r.label)}</td>
                         {r.values.map((c, i) =>
                           renderCell(c, i, i === FEATURED_COL),
                         )}
@@ -293,7 +294,7 @@ export default function PricingPage() {
                 {tPricing("tokenSection.titleMain")} <em>{tPricing("tokenSection.titleAccent")}</em>
               </h2>
               <p className="lead">
-                {tPricing("tokenSection.description")}
+                {brandText(tPricing("tokenSection.description"))}
               </p>
             </div>
             <div className="token-examples">
@@ -307,8 +308,8 @@ export default function PricingPage() {
                 >
                   <span className="n">{t.n}</span>
                   <span className="what">
-                    {t.what}
-                    <em>{t.note}</em>
+                    {brandText(t.what)}
+                    <em>{brandText(t.note)}</em>
                   </span>
                   <span className="cost">
                     <b>{t.cost}</b>
@@ -342,11 +343,7 @@ export default function PricingPage() {
             <em>{tPricing("waitlist.headingAccent")}</em>
           </>
         }
-        body={
-          <>
-            {tPricing("waitlist.body")}
-          </>
-        }
+        body={<>{brandText(tPricing("waitlist.body"))}</>}
       />
       <Footer />
     </>

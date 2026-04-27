@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { brandText } from "@/lib/brand-text";
 
 export interface FAQItem {
   q: string;
@@ -49,7 +50,7 @@ export function FAQList({
             <div className="q-num">{String(idx + 1).padStart(2, "0")}</div>
             <div>
               <p className="q-q">{item.q}</p>
-              <p className="q-a">{item.a}</p>
+              <p className="q-a">{brandText(item.a)}</p>
             </div>
             <div className="q-toggle">{togglePlusMinus ? "" : "+"}</div>
           </div>

@@ -2,6 +2,7 @@
 
 import {Link} from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
+import { brandText } from "@/lib/brand-text";
 import {
   Fragment,
   KeyboardEvent as ReactKeyboardEvent,
@@ -302,7 +303,15 @@ export function ProductWorkspace() {
               </div>
             </div>
 
-            <div className="ans-label">doLegal · answer</div>
+            <div
+              className="product-ai-answer-hdr"
+              style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}
+            >
+              <div className="avatar ai" aria-hidden>DL</div>
+              <div className="ans-label" style={{ marginBottom: 0, flex: 1, minWidth: 0 }}>
+                {brandText("doLegal · answer")}
+              </div>
+            </div>
 
             <div className="product-conclusion">
               <span className="tag">Conclusion</span>VAT registration becomes
@@ -399,15 +408,21 @@ export function ProductWorkspace() {
                   <div className="av">AM</div>
                   <div className="q">{t.user}</div>
                 </div>
-                <div className="ans-label">
-                  doLegal · answer
-                  {t.state === "loading" && (
-                    <span className="typing">
-                      <i />
-                      <i />
-                      <i />
-                    </span>
-                  )}
+                <div
+                  className="product-ai-answer-hdr"
+                  style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}
+                >
+                  <div className="avatar ai" aria-hidden>DL</div>
+                  <div className="ans-label" style={{ marginBottom: 0, flex: 1, minWidth: 0 }}>
+                    {brandText("doLegal · answer")}
+                    {t.state === "loading" && (
+                      <span className="typing">
+                        <i />
+                        <i />
+                        <i />
+                      </span>
+                    )}
+                  </div>
                 </div>
                 {t.state === "loading" ? (
                   <div className="product-conclusion">

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { brandText } from "@/lib/brand-text";
 
 export const metadata: Metadata = {
   title: "Refund Policy | doLegal",
@@ -15,8 +16,9 @@ export default function RefundPolicyPage() {
           Refund <em>Policy</em>
         </h1>
         <p className="section-sub" style={{ fontWeight: 700 }}>
-          Last updated: April 22, 2026. This policy explains when doLegal subscription and top-up
-          payments may be refunded.
+          {brandText(
+            "Last updated: April 22, 2026. This policy explains when doLegal subscription and top-up payments may be refunded.",
+          )}
         </p>
 
         <section style={{ marginTop: 32 }}>

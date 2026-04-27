@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import { useTranslations } from "next-intl";
+import { brandText } from "@/lib/brand-text";
 
 interface WaitlistProps {
   heading?: React.ReactNode;
@@ -24,7 +25,7 @@ export function Waitlist({ heading, body }: WaitlistProps) {
     </>
   );
 
-  const defaultBody = <>{t("description")}</>;
+  const defaultBody = <>{brandText(t("description"))}</>;
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -100,7 +101,7 @@ export function Waitlist({ heading, body }: WaitlistProps) {
                 {statusMessage}
               </p>
             ) : null}
-            <p className="waitlist-foot">{t("footnote")}</p>
+            <p className="waitlist-foot">{brandText(t("footnote"))}</p>
           </div>
         </div>
       </div>

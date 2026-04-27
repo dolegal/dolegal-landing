@@ -69,7 +69,7 @@
           "items": [
             "Summarizes laws, regulations, and court decisions",
             "Identifies relevant clauses and legal precedents",
-            "Cross-references official Armenian government legislation sources",
+            "Cross-references official government legislation sources",
             "Structured output: Conclusion -> Reasoning -> References",
             "Upload a document for context-aware Q&A"
           ]
@@ -108,7 +108,7 @@
         },
         {
           "title": "AI retrieves the law",
-          "description": "doLegal searches its indexed corpus of Armenian legislation and case law, retrieves the most relevant articles, and generates a grounded answer."
+          "description": "doLegal searches its indexed corpus of legislation and case law, retrieves the most relevant articles, and generates a grounded answer."
         },
         {
           "title": "Verify every citation",

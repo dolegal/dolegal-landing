@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { brandText } from "@/lib/brand-text";
 
 type DemoKey = "vat" | "draft" | "deadline";
 
@@ -199,18 +200,18 @@ export function LiveDemo() {
                   className="msg-text"
                   style={{ fontStyle: "italic", color: "var(--ink)" }}
                 >
-                  {demo.q}
+                  {brandText(demo.q)}
                 </div>
               </div>
             </div>
 
             <div className="msg-user msg-ai fade-in">
-              <div className="avatar ai">d</div>
+              <div className="avatar ai">DL</div>
               <div className="msg-content">
                 <div className="msg-label">{t("demoAssistantLabel")}</div>
                 <div className="msg-text">
                   <div className={`conclusion${isTyping ? " caret" : ""}`}>
-                    {typed}
+                    {brandText(typed)}
                   </div>
 
                   {!isTyping && (
@@ -218,7 +219,7 @@ export function LiveDemo() {
                       {demo.body.map((b) => (
                         <div key={b.h}>
                           <h4>{b.h}</h4>
-                          <p>{b.p}</p>
+                          <p>{typeof b.p === "string" ? brandText(b.p) : b.p}</p>
                         </div>
                       ))}
 
@@ -243,7 +244,7 @@ export function LiveDemo() {
                                 [{String(i + 1).padStart(2, "0")}]
                               </div>
                               <div className="cite-body">
-                                <b>{c.tag}</b> — {c.label}
+                                <b>{c.tag}</b> — {brandText(c.label)}
                               </div>
                               <button
                                 className="cite-link"
@@ -272,7 +273,7 @@ export function LiveDemo() {
                             {isExpanded ? (
                               <div className="cite-detail">
                                 <span className="cite-detail-label">Quote from legislation</span>
-                                <p>{c.quote}</p>
+                                <p>{brandText(c.quote)}</p>
                               </div>
                             ) : null}
                           </div>
@@ -305,7 +306,7 @@ export function LiveDemo() {
           </div>
         </div>
       </div>
-      <p className="demo-note">{t("demoNote")}</p>
+      <p className="demo-note">{brandText(t("demoNote"))}</p>
     </div>
   );
 }

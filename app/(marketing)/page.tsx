@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import {useTranslations} from "next-intl";
 import {Link} from "@/i18n/navigation";
+import { brandText } from "@/lib/brand-text";
 import { IssueStrip } from "../_components/IssueStrip";
 import { Masthead } from "../_components/Masthead";
 import { Waitlist } from "../_components/Waitlist";
@@ -15,7 +16,6 @@ export const metadata: Metadata = {
 
 export default function LandingPage() {
   const tNav = useTranslations("nav");
-  const tHero = useTranslations("hero");
   const tParity = useTranslations("landing.parity");
   const tStats = useTranslations("landing.heroStats");
   const tProblem = useTranslations("landing.problem");
@@ -70,7 +70,7 @@ export default function LandingPage() {
                 <span className="small">{tParity("heroLine4")}</span>
               </h1>
               <p className="lede">
-                {tParity("heroDescriptionExact")}
+                {brandText(tParity("heroDescriptionExact"))}
               </p>
               <div className="cta-row">
                 <Link className="btn-primary" href="#waitlist">
@@ -114,7 +114,7 @@ export default function LandingPage() {
             <em>{tParity("featuresTitleAccentExact")}</em>
           </h2>
           <p className="section-sub">
-            {tFeatures("description")}
+            {brandText(tFeatures("description"))}
           </p>
 
           <div className="cap-grid">
@@ -122,10 +122,10 @@ export default function LandingPage() {
               <div className="cap" key={cap.title}>
                 <div className="cap-num">{i + 1}</div>
                 <h3>{cap.title}</h3>
-                <p className="cap-desc">{cap.description}</p>
+                <p className="cap-desc">{brandText(cap.description)}</p>
                 <ul className="cap-list">
                   {cap.items.map((item: string) => (
-                    <li key={item}>{item}</li>
+                    <li key={item}>{brandText(item)}</li>
                   ))}
                 </ul>
               </div>
@@ -153,7 +153,7 @@ export default function LandingPage() {
               {oldWayItems.map((t: string) => (
                 <div className="compare-item" key={t}>
                   <span className="mark">—</span>
-                  <span>{t}</span>
+                  <span>{brandText(t)}</span>
                 </div>
               ))}
             </div>
@@ -164,7 +164,7 @@ export default function LandingPage() {
               {doLegalItems.map((t: string) => (
                 <div className="compare-item" key={t}>
                   <span className="mark">✦</span>
-                  <span>{t}</span>
+                  <span>{brandText(t)}</span>
                 </div>
               ))}
             </div>
@@ -181,7 +181,7 @@ export default function LandingPage() {
             <em>{tParity("howTitleAccentExact")}</em>
           </h2>
           <p className="section-sub">
-            {tParity("heroDescriptionExact")} {/* Using hero description as fallback or what was here? */}
+            {brandText(tParity("heroDescriptionExact"))} {/* Using hero description as fallback or what was here? */}
           </p>
 
           <div className="steps">
@@ -192,7 +192,7 @@ export default function LandingPage() {
                   <span className="step-num-index">0{i + 1}</span>
                 </span>
                 <h3>{step.title}</h3>
-                <p>{step.description}</p>
+                <p>{brandText(step.description)}</p>
                 {/* keeping original SVGs inside would require custom mapping,
                     let's re-use the hardcoded SVGs by passing index */}
                 {i === 0 && (
@@ -296,10 +296,10 @@ export default function LandingPage() {
               <div className="aud" key={aud.tag}>
                 <div className="aud-kicker step-num">{aud.tag}</div>
                 <h4>{aud.title}</h4>
-                <p>{aud.description}</p>
+                <p>{brandText(aud.description)}</p>
                 <ul>
                   {aud.wins.map((w: string) => (
-                    <li key={w}>{w}</li>
+                    <li key={w}>{brandText(w)}</li>
                   ))}
                 </ul>
               </div>
@@ -316,7 +316,8 @@ export default function LandingPage() {
             {tParity("faqTitleMainExact")} <em>{tParity("faqTitleAccentExact")}</em>
           </h2>
           <p className="section-sub">
-            {tFaq("descriptionPrefix")} <a href={`mailto:${tFaq("email")}`} style={{ color: "var(--accent)", textDecoration: "none", borderBottom: "1px solid var(--accent)" }}>{tFaq("email")}</a>.
+            {brandText(tFaq("descriptionPrefix"))}{" "}
+            <a href={`mailto:${tFaq("email")}`} style={{ color: "var(--accent)", textDecoration: "none", borderBottom: "1px solid var(--accent)" }}>{tFaq("email")}</a>.
           </p>
 
           <FAQList items={faqs.map((f: any) => ({ q: f.question, a: f.answer }))} />
