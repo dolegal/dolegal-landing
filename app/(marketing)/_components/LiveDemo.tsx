@@ -236,7 +236,7 @@ export function LiveDemo() {
                   <div className="msg-content">
                     <div className="msg-label">{t("demoDraftClarifyReplyLabel")}</div>
                     <div className="msg-text" style={{ color: "var(--ink)" }}>
-                      <p>{brandText(t("demoDraftClarifyReply"))}</p>
+                      <p style={{ fontStyle: "italic" }}>{brandText(t("demoDraftClarifyReply"))}</p>
                       <p style={{ marginTop: 14 }}>
                         <code style={uploadCodeStyle}>⬆ {t("demoDraftUploadedDocName")}</code>
                       </p>

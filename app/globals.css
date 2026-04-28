@@ -596,7 +596,7 @@ body.product-body { height: 100vh; overflow: hidden; font-size: 15px; }
   font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase;
   color: var(--ink-3); margin-bottom: 6px;
 }
-.msg-text { font-family: var(--serif); font-size: 17px; line-height: 1.5; color: var(--ink); }
+.msg-text { font-family: var(--serif); font-size: 13.8px; line-height: 1.5; color: var(--ink); }
 
 .msg-ai .msg-text h4 {
   font-family: var(--serif-display);
@@ -616,18 +616,18 @@ body.product-body { height: 100vh; overflow: hidden; font-size: 15px; }
   background: var(--accent-wash);
   border-left: 2px solid var(--accent);
   font-style: italic;
-  font-size: 16.5px; line-height: 1.5; color: var(--ink);
+  font-size: inherit; line-height: inherit; color: var(--ink);
   margin-bottom: 12px;
 }
 
-.citations { margin-top: 18px; border-top: 1px dashed var(--rule); padding-top: 14px; }
+.citations { margin-top: 16px; border-top: 1px dashed var(--rule); padding-top: 10px; }
 .citations-title {
-  font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--ink-3); margin-bottom: 10px;
+  font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink-3); margin-bottom: 7px;
   display: flex; justify-content: space-between; align-items: center;
 }
 .cite {
-  padding: 8px 0; border-bottom: 1px solid var(--rule-soft);
+  padding: 6px 0; border-bottom: 1px solid var(--rule-soft);
 }
 .cite-main {
   display: grid; grid-template-columns: 22px 1fr auto;
@@ -635,9 +635,9 @@ body.product-body { height: 100vh; overflow: hidden; font-size: 15px; }
   align-items: baseline;
 }
 .cite:last-child { border-bottom: 0; }
-.cite-num { font-family: var(--mono); font-size: 11px; color: var(--accent); font-variant-numeric: tabular-nums; }
-.cite-body { font-family: var(--serif); font-size: 14.5px; color: var(--ink-2); line-height: 1.4; }
-.cite-body b { color: var(--ink); font-weight: 600; font-family: var(--mono); font-size: 13px; letter-spacing: 0.02em; }
+.cite-num { font-family: var(--mono); font-size: 10px; color: var(--accent); font-variant-numeric: tabular-nums; }
+.cite-body { font-family: var(--serif); font-size: 12.8px; color: var(--ink-3); line-height: 1.35; }
+.cite-body b { color: var(--ink-2); font-weight: 600; font-family: var(--mono); font-size: 11.8px; letter-spacing: 0.02em; }
 .cite-link {
   width: 22px; height: 22px;
   display: inline-grid; place-items: center;
