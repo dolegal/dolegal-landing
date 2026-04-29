@@ -127,7 +127,6 @@ export function PlansAndBilling() {
                         {period === "annual" ? tP("billedYearly") : tPricing("monthlyShort")}
                       </span>
                     </div>
-                    <p className="price-note">{brandText(lp.priceNote)}</p>
                   </>
                 )}
               </div>

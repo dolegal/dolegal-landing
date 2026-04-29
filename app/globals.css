@@ -1144,13 +1144,17 @@ body.product-body { height: 100vh; overflow: hidden; font-size: 15px; }
 }
 .plan .price.enterprise {
   margin-bottom: 0;
+  height: 56px;
+  align-items: flex-end;
 }
 .plan .price .enterprise-copy {
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 0.12em;
+  line-height: 1;
   text-transform: uppercase;
   color: var(--accent);
+  align-self: flex-end;
 }
 .plan .price .cur {
   font-family: var(--mono); font-size: 12px; color: var(--ink-3); letter-spacing: 0.1em;
