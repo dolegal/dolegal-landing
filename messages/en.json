@@ -323,6 +323,32 @@
         "headingAccent": "Lock in launch pricing.",
         "body": "doLegal is not publicly released. Early-access invitees get the launch tariff grandfathered for 12 months after general availability."
       },
+      "contactSales": {
+        "sectionLabel": "Enterprise intake",
+        "titleMain": "Talk to sales",
+        "titleAccent": "about Rocket.",
+        "description": "Rocket pricing depends on team structure, onboarding depth, and support workflow. Share your details and we will tailor a plan for your practice.",
+        "planPriceCopy": "Contact sales for pricing",
+        "tableCta": "Contact sales",
+        "submitCta": "Send request",
+        "submittingCta": "Sending...",
+        "success": "Thanks. Our team will reach out shortly.",
+        "error": "Unable to submit right now. Please try again.",
+        "fields": {
+          "fullName": "Full Name",
+          "email": "Email",
+          "companyName": "Company Name",
+          "companySize": "Company size",
+          "message": "Message"
+        },
+        "sizeOptions": [
+          "1-5 employees",
+          "6-10 employees",
+          "11-25 employees",
+          "26-50 employees",
+          "50+ employees"
+        ]
+      },
       "plans": [
         {
           "name": "Free",
@@ -440,7 +466,7 @@
           "period": "per month",
           "priceNote": "per month, per team",
           "featured": false,
-          "cta": "Join waitlist",
+          "cta": "Contact sales",
           "features": [
             {
               "text": "1,000,000 tokens/month",

@@ -8,6 +8,7 @@ import { Masthead } from "../../_components/Masthead";
 import { Waitlist } from "../../_components/Waitlist";
 import { Footer } from "../../_components/Footer";
 import { FAQList } from "../_components/FAQList";
+import { ContactSalesForm } from "./_components/ContactSalesForm";
 import { PlansAndBilling } from "./_components/PlansAndBilling";
 
 export const metadata: Metadata = {
@@ -256,7 +257,10 @@ export default function PricingPage() {
                     {planNames[2]}<span className="sub">AMD 15,000</span>
                   </th>
                   <th className="plan-head">
-                    {planNames[3]}<span className="sub">AMD 25,000</span>
+                    {planNames[3]}
+                    <Link className="sub" href="#contact-sales">
+                      {tPricing("contactSales.tableCta")}
+                    </Link>
                   </th>
                 </tr>
               </thead>
@@ -319,6 +323,12 @@ export default function PricingPage() {
               ))}
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="contact-sales-section" id="contact-sales">
+        <div className="wrap">
+          <ContactSalesForm />
         </div>
       </section>
 

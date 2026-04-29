@@ -113,17 +113,27 @@ export function PlansAndBilling() {
               </div>
               <h3>{lp.name}</h3>
               <p className="desc">{brandText(lp.desc)}</p>
-              <div className="price">
-                <span className="cur">AMD</span>
-                <span className="amt">{amounts[i]}</span>
-                <span className="unit">
-                  {period === "annual" ? tP("billedYearly") : tPricing("monthlyShort")}
-                </span>
+              <div className="price-stack">
+                {p.id === "rocket" ? (
+                  <div className="price enterprise">
+                    <span className="enterprise-copy">{tPricing("contactSales.planPriceCopy")}</span>
+                  </div>
+                ) : (
+                  <>
+                    <div className="price">
+                      <span className="cur">AMD</span>
+                      <span className="amt">{amounts[i]}</span>
+                      <span className="unit">
+                        {period === "annual" ? tP("billedYearly") : tPricing("monthlyShort")}
+                      </span>
+                    </div>
+                    <p className="price-note">{brandText(lp.priceNote)}</p>
+                  </>
+                )}
               </div>
-              <p className="price-note">{brandText(lp.priceNote)}</p>
               <Link
                 className={`plan-cta${isFeat ? "" : " ghost"}`}
-                href="/#waitlist"
+                href={p.id === "rocket" ? "#contact-sales" : "/#waitlist"}
               >
                 {lp.cta}
               </Link>
