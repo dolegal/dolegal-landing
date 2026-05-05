@@ -186,7 +186,7 @@
       "billingAriaLabel": "Billing period",
       "monthlyShort": "/mo",
       "tokensUnit": "tokens",
-      "vatNote": "All listed prices include VAT. Amounts are shown in AMD.",
+      "vatNote": "Price includes VAT.",
       "vatShort": "Incl. VAT",
       "meta": {
         "currencyLabel": "Currency",
@@ -220,15 +220,30 @@
               "rows": [
                 {
                   "label": "Monthly tokens",
-                  "cells": ["5k", "25k", "150k", "Configurable"]
+                  "cells": [
+                    "5k",
+                    "25k",
+                    "150k",
+                    "Configurable"
+                  ]
                 },
                 {
                   "label": "Storage space",
-                  "cells": ["0 GB", "1 GB", "10 GB", "100 GB shared"]
+                  "cells": [
+                    "0 GB",
+                    "1 GB",
+                    "10 GB",
+                    "100 GB shared"
+                  ]
                 },
                 {
                   "label": "File upload size",
-                  "cells": ["No uploads", "Up to 5 MB", "Up to 10 MB", "Up to 25 MB"]
+                  "cells": [
+                    "No uploads",
+                    "Up to 5 MB",
+                    "Up to 10 MB",
+                    "Up to 25 MB"
+                  ]
                 }
               ]
             },
@@ -237,11 +252,21 @@
               "rows": [
                 {
                   "label": "Article-level citations",
-                  "cells": ["Yes", "Yes", "Yes", "Yes"]
+                  "cells": [
+                    "Yes",
+                    "Yes",
+                    "Yes",
+                    "Yes"
+                  ]
                 },
                 {
                   "label": "Multilingual Q&A",
-                  "cells": ["AM/RU/EN", "AM/RU/EN", "AM/RU/EN", "AM/RU/EN"]
+                  "cells": [
+                    "AM/RU/EN",
+                    "AM/RU/EN",
+                    "AM/RU/EN",
+                    "AM/RU/EN"
+                  ]
                 }
               ]
             },
@@ -250,23 +275,48 @@
               "rows": [
                 {
                   "label": "Basic drafting",
-                  "cells": ["Yes", "Template-based drafting only", "Included", "Included"]
+                  "cells": [
+                    "Yes",
+                    "Template-based drafting only",
+                    "Included",
+                    "Included"
+                  ]
                 },
                 {
                   "label": "Advanced drafting",
-                  "cells": ["No", "No", "Context-aware + clause editing + multi-step drafting", "Context-aware + clause editing + multi-step drafting"]
+                  "cells": [
+                    "No",
+                    "No",
+                    "Context-aware + clause editing + multi-step drafting",
+                    "Context-aware + clause editing + multi-step drafting"
+                  ]
                 },
                 {
                   "label": "DOCX export",
-                  "cells": ["No", "Yes", "Yes", "Yes"]
+                  "cells": [
+                    "No",
+                    "Yes",
+                    "Yes",
+                    "Yes"
+                  ]
                 },
                 {
                   "label": "Personal templates",
-                  "cells": ["No", "No", "Save and reuse own templates", "Save and reuse own templates"]
+                  "cells": [
+                    "No",
+                    "No",
+                    "Save and reuse own templates",
+                    "Save and reuse own templates"
+                  ]
                 },
                 {
                   "label": "Team templates",
-                  "cells": ["No", "No", "No", "Shared organization template library"]
+                  "cells": [
+                    "No",
+                    "No",
+                    "No",
+                    "Shared organization template library"
+                  ]
                 }
               ]
             },
@@ -275,11 +325,21 @@
               "rows": [
                 {
                   "label": "Document analysis",
-                  "cells": ["No", "Basic analysis", "Advanced analysis", "Advanced analysis"]
+                  "cells": [
+                    "No",
+                    "Basic analysis",
+                    "Advanced analysis",
+                    "Advanced analysis"
+                  ]
                 },
                 {
                   "label": "Document comparison",
-                  "cells": ["No", "No", "Redlining + clause mapping", "Redlining + clause mapping"]
+                  "cells": [
+                    "No",
+                    "No",
+                    "Redlining + clause mapping",
+                    "Redlining + clause mapping"
+                  ]
                 }
               ]
             },
@@ -288,19 +348,39 @@
               "rows": [
                 {
                   "label": "Chat history",
-                  "cells": ["1 saved chat", "Full history", "Full history", "Full history"]
+                  "cells": [
+                    "1 saved chat",
+                    "Full history",
+                    "Full history",
+                    "Full history"
+                  ]
                 },
                 {
                   "label": "Pinned chats",
-                  "cells": ["0", "3", "5", "Unlimited"]
+                  "cells": [
+                    "0",
+                    "3",
+                    "5",
+                    "Unlimited"
+                  ]
                 },
                 {
                   "label": "Chat search",
-                  "cells": ["No", "Yes", "Yes", "Team-wide chat + document search"]
+                  "cells": [
+                    "No",
+                    "Yes",
+                    "Yes",
+                    "Team-wide chat + document search"
+                  ]
                 },
                 {
                   "label": "Document search",
-                  "cells": ["No", "No", "Yes", "Team-wide chat + document search"]
+                  "cells": [
+                    "No",
+                    "No",
+                    "Yes",
+                    "Team-wide chat + document search"
+                  ]
                 }
               ]
             },
@@ -309,15 +389,30 @@
               "rows": [
                 {
                   "label": "Shared workspace",
-                  "cells": ["No", "No", "No", "Shared chats and documents"]
+                  "cells": [
+                    "No",
+                    "No",
+                    "No",
+                    "Shared chats and documents"
+                  ]
                 },
                 {
                   "label": "Role-based access",
-                  "cells": ["No", "No", "No", "Admin / editor / viewer"]
+                  "cells": [
+                    "No",
+                    "No",
+                    "No",
+                    "Admin / editor / viewer"
+                  ]
                 },
                 {
                   "label": "Usage analytics",
-                  "cells": ["No", "No", "No", "Per-user usage tracking"]
+                  "cells": [
+                    "No",
+                    "No",
+                    "No",
+                    "Per-user usage tracking"
+                  ]
                 }
               ]
             },
@@ -326,11 +421,21 @@
               "rows": [
                 {
                   "label": "Onboarding session",
-                  "cells": ["No", "No", "No", "Yes"]
+                  "cells": [
+                    "No",
+                    "No",
+                    "No",
+                    "Yes"
+                  ]
                 },
                 {
                   "label": "Support level",
-                  "cells": ["No", "Email support", "Email support", "Dedicated channel, <6h"]
+                  "cells": [
+                    "No",
+                    "Email support",
+                    "Email support",
+                    "Dedicated channel, <6h"
+                  ]
                 }
               ]
             }
@@ -410,11 +515,19 @@
               "enabled": true
             },
             {
-              "text": "1 saved chat · multilingual Q&A (AM/RU/EN)",
+              "text": "1 saved chat",
               "enabled": true
             },
             {
-              "text": "Article-level citations & basic drafting",
+              "text": "Multilingual Q&A",
+              "enabled": true
+            },
+            {
+              "text": "Article-level citations",
+              "enabled": true
+            },
+            {
+              "text": "Basic drafting",
               "enabled": true
             },
             {
@@ -422,11 +535,19 @@
               "enabled": false
             },
             {
-              "text": "No pinned chats or chat search",
+              "text": "No pinned chats",
               "enabled": false
             },
             {
-              "text": "No DOCX export or document comparison",
+              "text": "No chat search",
+              "enabled": false
+            },
+            {
+              "text": "No DOCX export",
+              "enabled": false
+            },
+            {
+              "text": "No document comparison",
               "enabled": false
             }
           ]
@@ -446,23 +567,47 @@
               "enabled": true
             },
             {
-              "text": "1 GB storage · uploads up to 5 MB",
+              "text": "1 GB storage",
               "enabled": true
             },
             {
-              "text": "Full chat history · 3 pinned chats · chat search",
+              "text": "Uploads up to 5 MB",
               "enabled": true
             },
             {
-              "text": "Template-based drafting · DOCX export",
+              "text": "Full chat history",
               "enabled": true
             },
             {
-              "text": "Basic document analysis · email support",
+              "text": "3 pinned chats",
               "enabled": true
             },
             {
-              "text": "No document comparison or document search",
+              "text": "Chat search",
+              "enabled": true
+            },
+            {
+              "text": "Template-based drafting",
+              "enabled": true
+            },
+            {
+              "text": "DOCX export",
+              "enabled": true
+            },
+            {
+              "text": "Basic document analysis",
+              "enabled": true
+            },
+            {
+              "text": "Email support",
+              "enabled": true
+            },
+            {
+              "text": "No document comparison",
+              "enabled": false
+            },
+            {
+              "text": "No document search",
               "enabled": false
             }
           ]
@@ -482,19 +627,39 @@
               "enabled": true
             },
             {
-              "text": "10 GB storage · uploads up to 10 MB",
+              "text": "10 GB storage",
               "enabled": true
             },
             {
-              "text": "Advanced drafting · comparison · personal templates",
+              "text": "Uploads up to 10 MB",
               "enabled": true
             },
             {
-              "text": "Advanced analysis · chat & document search",
+              "text": "Advanced drafting",
               "enabled": true
             },
             {
-              "text": "Full history · 5 pinned chats",
+              "text": "Document comparison and personal templates",
+              "enabled": true
+            },
+            {
+              "text": "Advanced analysis",
+              "enabled": true
+            },
+            {
+              "text": "Chat search",
+              "enabled": true
+            },
+            {
+              "text": "Document search",
+              "enabled": true
+            },
+            {
+              "text": "Full history",
+              "enabled": true
+            },
+            {
+              "text": "5 pinned chats",
               "enabled": true
             },
             {
@@ -514,27 +679,55 @@
           "cta": "Contact us",
           "features": [
             {
-              "text": "Configurable monthly tokens · 100 GB shared storage",
+              "text": "Configurable monthly tokens",
               "enabled": true
             },
             {
-              "text": "Uploads up to 25 MB · team templates",
+              "text": "100 GB shared storage",
               "enabled": true
             },
             {
-              "text": "Shared workspace · roles · usage analytics",
+              "text": "Uploads up to 25 MB",
               "enabled": true
             },
             {
-              "text": "Team-wide chat & document search",
+              "text": "Team templates",
               "enabled": true
             },
             {
-              "text": "Onboarding session · dedicated support (<6h)",
+              "text": "Shared workspace",
               "enabled": true
             },
             {
-              "text": "Shared chats & documents · everything in Pro",
+              "text": "Roles",
+              "enabled": true
+            },
+            {
+              "text": "Usage analytics",
+              "enabled": true
+            },
+            {
+              "text": "Team chat search",
+              "enabled": true
+            },
+            {
+              "text": "Team document search",
+              "enabled": true
+            },
+            {
+              "text": "Onboarding session",
+              "enabled": true
+            },
+            {
+              "text": "Dedicated support (<6h)",
+              "enabled": true
+            },
+            {
+              "text": "Shared chats and documents",
+              "enabled": true
+            },
+            {
+              "text": "Everything in Pro",
               "enabled": true
             }
           ]
