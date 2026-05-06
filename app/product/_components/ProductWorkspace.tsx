@@ -181,11 +181,9 @@ export function ProductWorkspace() {
           <Link href="/" className="back-link">
             ← Landing
           </Link>
-          <div className="brand">
-            <span>do</span>
-            <span className="legal">Legal</span>
-            <span className="dot">.</span>
-          </div>
+          <Link href="/" className="brand" aria-label="doLegal">
+            <img className="brand-logo" src="/doLegal-logo.svg" alt="doLegal" />
+          </Link>
         </div>
         <div className="top-center">
           <span className="crumb">

@@ -295,7 +295,7 @@ body.product-body { height: 100vh; overflow: hidden; font-size: 15px; }
 }
 .brand .brand-logo {
   display: block;
-  height: 30px;
+  height: 36px;
   width: auto;
 }
 .brand::after {
@@ -1013,7 +1013,7 @@ body.product-body { height: 100vh; overflow: hidden; font-size: 15px; }
 .foot-brand { font-family: var(--serif-display); font-size: 38px; font-style: italic; margin-bottom: 8px; }
 .foot-brand .brand-logo {
   display: block;
-  height: 30px;
+  height: 36px;
   width: auto;
 }
 .foot-brand .legal { font-style: normal; font-weight: 600; }
