@@ -101,13 +101,13 @@ export type LandingContent = {
 
 export const languageOptions: Array<{
   locale: AppLocale;
-  code: "EN" | "RU" | "HY";
+  code: "EN" | "RU" | "AM";
   label: string;
   flagSrc: string;
 }> = [
   { locale: "en", code: "EN", label: "English", flagSrc: "/flags/en.svg" },
   { locale: "ru", code: "RU", label: "Русский", flagSrc: "/flags/ru.svg" },
-  { locale: "hy", code: "HY", label: "Հայերեն", flagSrc: "/flags/hy.svg" },
+  { locale: "am", code: "AM", label: "Հայերեն", flagSrc: "/flags/hy.svg" },
 ];
 
 export const landingImages = {

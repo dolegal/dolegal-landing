@@ -126,7 +126,7 @@ export function LandingPage() {
                   href="#early-access"
                   onClick={handleAnchorClick("#early-access")}
                   className={`rounded-full bg-[#1d1d1f] px-7 py-3.5 text-[15px] font-medium text-white transition hover:bg-[#3a3a3c] ${
-                    locale === "hy" ? "[font-family:var(--font-noto-sans-armenian)] font-semibold" : ""
+                    locale === "am" ? "[font-family:var(--font-noto-sans-armenian)] font-semibold" : ""
                   }`}
                 >
                   {content.hero.primaryCta}
@@ -304,7 +304,7 @@ export function LandingPage() {
               <label
                 htmlFor="early-access-email"
                 className={`mb-2 block text-[12px] uppercase tracking-[0.08em] text-white/55 ${
-                  locale === "hy" ? "[font-family:var(--font-noto-sans-armenian)] font-semibold" : "font-medium"
+                  locale === "am" ? "[font-family:var(--font-noto-sans-armenian)] font-semibold" : "font-medium"
                 }`}
               >
                 {content.earlyAccess.emailLabel}
@@ -325,7 +325,7 @@ export function LandingPage() {
               type="submit"
               disabled={earlyAccessState === "submitting"}
               className={`h-12 whitespace-nowrap rounded-xl bg-white px-6 text-[15px] text-[#1d1d1f] transition hover:bg-[#f5f5f7] ${
-                locale === "hy" ? "[font-family:var(--font-noto-sans-armenian)] font-semibold" : "font-medium"
+                locale === "am" ? "[font-family:var(--font-noto-sans-armenian)] font-semibold" : "font-medium"
               }`}
             >
               {earlyAccessState === "submitting" ? content.earlyAccess.submittingButtonLabel : content.earlyAccess.buttonLabel}

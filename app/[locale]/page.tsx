@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import MarketingHomePage from "../(marketing)/page";
+import MarketingHomePage from "../(marketing)/_views/home";
 import { Footer } from "../_components/Footer";
 
 type SupportedLocale = "en" | "ru" | "am";

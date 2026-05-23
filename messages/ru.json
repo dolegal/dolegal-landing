@@ -887,8 +887,9 @@
       "faqSectionLabelExact": "Частые вопросы",
       "faqTitleMainExact": "Распространенные",
       "faqTitleAccentExact": "вопросы.",
-      "issueLastSynced": "Данные синхронизированы — 4 дня назад",
-      "issueStats": "100 324 закона в индексе · 3 языка · 17 кодексов"
+      "issueLastSynced": "Данные синхронизированы — {days, plural, =0 {сегодня} one {# день назад} few {# дня назад} many {# дней назад} other {# дней назад}}",
+      "corpusLastSynced": "CORPUS · синхр. {days, plural, =0 {сегодня} one {# дн. назад} few {# дн. назад} many {# дн. назад} other {# дн. назад}}",
+      "issueStats": "100 324 закона в индексе · 3 языка · Полный правовой корпус"
     },
     "pricingParity": {
       "monthly": "Ежемесячно",

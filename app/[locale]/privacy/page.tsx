@@ -24,7 +24,7 @@ const COPY: Record<SupportedLocale, PrivacyCopy> = {
       {
         heading: "1. Controller",
         paragraphs: [
-          "doLegal is operated by [LEGAL ENTITY NAME], registered in the Republic of Armenia, with registered address at [REGISTERED ADDRESS]. Contact: hello@dolegal.am.",
+          "doLegal is operated by Sergey Torosyan, an individual in the Republic of Armenia, with address at Tsarav Aghbyur 55/20. Contact: hello@dolegal.am.",
         ],
       },
       {
@@ -32,7 +32,7 @@ const COPY: Record<SupportedLocale, PrivacyCopy> = {
         bullets: [
           "Waitlist data: email address submitted via the early-access form.",
           "Essential technical data: request metadata and server logs for security and abuse prevention.",
-          "Language preference data: locale cookie used to remember selected language.",
+          "Language preference data: locale segment in the URL path (e.g. /en) when you choose a non-default language.",
           "Payment data (when paid plans launch): processed by Paddle as merchant of record.",
         ],
       },
@@ -103,7 +103,7 @@ const COPY: Record<SupportedLocale, PrivacyCopy> = {
       {
         heading: "1. Оператор персональных данных",
         paragraphs: [
-          "doLegal управляется [LEGAL ENTITY NAME], зарегистрированной в Республике Армения по адресу [REGISTERED ADDRESS]. Контакт: hello@dolegal.am.",
+          "doLegal управляется Sergey Torosyan, физическим лицом в Республике Армения, по адресу Tsarav Aghbyur 55/20. Контакт: hello@dolegal.am.",
         ],
       },
       {
@@ -111,7 +111,7 @@ const COPY: Record<SupportedLocale, PrivacyCopy> = {
         bullets: [
           "Данные листа ожидания: email, отправленный через форму раннего доступа.",
           "Обязательные технические данные: метаданные запросов и серверные логи для безопасности и предотвращения злоупотреблений.",
-          "Данные языковых предпочтений: cookie локали для запоминания выбранного языка.",
+          "Данные языковых предпочтений: сегмент локали в URL (например, /ru) при выборе языка.",
           "Платежные данные (после запуска платных тарифов): обрабатываются Paddle как merchant of record.",
         ],
       },
@@ -182,7 +182,7 @@ const COPY: Record<SupportedLocale, PrivacyCopy> = {
       {
         heading: "1. Տվյալների վերահսկող",
         paragraphs: [
-          "doLegal-ը կառավարվում է [LEGAL ENTITY NAME]-ի կողմից, որը գրանցված է Հայաստանի Հանրապետությունում՝ [REGISTERED ADDRESS] հասցեում։ Կապ՝ hello@dolegal.am։",
+          "doLegal-ը կառավարվում է Sergey Torosyan-ի կողմից, որը գործում է Հայաստանի Հանրապետությունում՝ Tsarav Aghbyur 55/20 հասցեում։ Կապ՝ hello@dolegal.am։",
         ],
       },
       {
@@ -190,7 +190,7 @@ const COPY: Record<SupportedLocale, PrivacyCopy> = {
         bullets: [
           "Սպասման ցուցակի տվյալներ՝ վաղ հասանելիության ձևով ուղարկված էլ. հասցե։",
           "Անհրաժեշտ տեխնիկական տվյալներ՝ հարցումների մետատվյալներ և սերվերի լոգեր՝ անվտանգության և չարաշահման կանխման նպատակով։",
-          "Լեզվական նախընտրության տվյալներ՝ locale cookie՝ ընտրված լեզուն հիշելու համար։",
+          "Լեզվական նախընտրության տվյալներ՝ URL-ի լեզվական հատված (օր. /en), երբ ընտրում եք ոչ լռելյայն լեզուն։",
           "Վճարումների տվյալներ (վճարովի փաթեթների մեկնարկից հետո)՝ մշակվում են Paddle-ի կողմից որպես merchant of record։",
         ],
       },

@@ -336,7 +336,7 @@ export function HeroDoodleCanvas() {
         <div className="px-4 py-4 md:px-5 md:py-5">
           <p
             className={`hero-ans-1 text-[13px] font-semibold text-slate-900 md:text-sm ${
-              locale === "hy" ? "[font-family:var(--font-hero-preview-hy)]" : ""
+              locale === "am" ? "[font-family:var(--font-hero-preview-hy)]" : ""
             }`}
           >
             {uc.answerTitle}
@@ -412,7 +412,7 @@ export function HeroDoodleCanvas() {
   });
 
   const cardFontClass =
-    locale === "hy" ? "[font-family:var(--font-hero-preview-hy)]" : "[font-family:var(--font-hero-preview-ui)]";
+    locale === "am" ? "[font-family:var(--font-hero-preview-hy)]" : "[font-family:var(--font-hero-preview-ui)]";
 
   return (
     <div
@@ -434,7 +434,7 @@ export function HeroDoodleCanvas() {
               <section key={`u-${i}`}>
                 <p
                   className={`mb-3 text-[11px] uppercase tracking-[0.14em] text-slate-500 ${
-                    locale === "hy" ? "font-semibold" : "font-medium"
+                    locale === "am" ? "font-semibold" : "font-medium"
                   }`}
                 >
                   {t("hero.previewQuestionLabel")}
@@ -449,7 +449,7 @@ export function HeroDoodleCanvas() {
               <section key={`a-${i}`}>
                 <p
                   className={`hero-ans-label mb-3 text-[11px] uppercase tracking-[0.14em] text-slate-500 ${
-                    locale === "hy" ? "font-semibold" : "font-medium"
+                    locale === "am" ? "font-semibold" : "font-medium"
                   }`}
                 >
                   {t("hero.previewAnswerLabel")}
@@ -463,7 +463,7 @@ export function HeroDoodleCanvas() {
             <section key="streaming-answer">
               <p
                 className={`hero-ans-label mb-3 text-[11px] uppercase tracking-[0.14em] text-slate-500 ${
-                  locale === "hy" ? "font-semibold" : "font-medium"
+                  locale === "am" ? "font-semibold" : "font-medium"
                 }`}
               >
                 {t("hero.previewAnswerLabel")}

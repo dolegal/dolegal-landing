@@ -5,6 +5,7 @@ import type { CSSProperties, MouseEvent, ReactNode } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Noto_Sans_Armenian, Noto_Serif_Armenian, Outfit, Playfair_Display } from "next/font/google";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
+import { stripLocalePrefix } from "@/i18n/pathname";
 import { languageOptions, type LandingContent } from "./content";
 import { DoLegalWordmark } from "./dolegal-wordmark";
 
@@ -64,8 +65,8 @@ export function MarketingShell({ children }: { children: ReactNode }) {
   const currentLanguage = languageOptions.find((option) => option.locale === locale) ?? languageOptions[0];
   const isHome = pathname === "/";
   const playfairOverrideStyle =
-    locale === "hy" ? ({ "--font-playfair": "var(--font-noto-serif-armenian)" } as CSSProperties) : undefined;
-  const armenianSansClass = locale === "hy" ? "[font-family:var(--font-noto-sans-armenian)]" : "";
+    locale === "am" ? ({ "--font-playfair": "var(--font-noto-serif-armenian)" } as CSSProperties) : undefined;
+  const armenianSansClass = locale === "am" ? "[font-family:var(--font-noto-sans-armenian)]" : "";
 
   const handleAnchorClick = (href: string) => (event: MouseEvent<HTMLAnchorElement>) => {
     if (!href.startsWith("#")) return;
@@ -149,7 +150,9 @@ export function MarketingShell({ children }: { children: ReactNode }) {
                     key={option.code}
                     type="button"
                     aria-label={option.label}
-                    onClick={() => router.replace(pathname, { locale: option.locale })}
+                    onClick={() =>
+                      router.replace(stripLocalePrefix(pathname), { locale: option.locale })
+                    }
                     className={`flex w-full items-center justify-center gap-2 px-3 py-2.5 text-sm transition ${
                       option.locale === locale ? "bg-black/5 font-medium text-black" : "text-black/70 hover:bg-black/5"
                     }`}
@@ -173,7 +176,7 @@ export function MarketingShell({ children }: { children: ReactNode }) {
                 href="#early-access"
                 onClick={handleAnchorClick("#early-access")}
                 className={`flex h-12 items-center rounded-xl bg-[#1d1d1f] px-5 text-[15px] text-white transition hover:bg-[#3a3a3c] ${
-                  locale === "hy" ? `${armenianSansClass} font-semibold` : "font-medium"
+                  locale === "am" ? `${armenianSansClass} font-semibold` : "font-medium"
                 }`}
               >
                 {content.hero.primaryCta}
@@ -181,7 +184,7 @@ export function MarketingShell({ children }: { children: ReactNode }) {
             ) : (
               <Link
                 className={`flex h-12 items-center rounded-xl bg-[#1d1d1f] px-5 text-[15px] text-white transition hover:bg-[#3a3a3c] ${
-                  locale === "hy" ? `${armenianSansClass} font-semibold` : "font-medium"
+                  locale === "am" ? `${armenianSansClass} font-semibold` : "font-medium"
                 }`}
                 href="/#early-access"
               >

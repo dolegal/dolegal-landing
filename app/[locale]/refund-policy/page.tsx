@@ -25,6 +25,7 @@ const COPY: Record<SupportedLocale, RefundCopy> = {
       {
         heading: "1. Merchant of record",
         paragraphs: [
+          "doLegal is operated by Sergey Torosyan, an individual in the Republic of Armenia, with address at Tsarav Aghbyur 55/20.",
           "Payments are processed by Paddle, our merchant of record. Paddle may handle payment operations, tax, and chargeback workflows according to its platform rules.",
         ],
       },
@@ -69,6 +70,7 @@ const COPY: Record<SupportedLocale, RefundCopy> = {
       {
         heading: "1. Платежный посредник",
         paragraphs: [
+          "doLegal управляется Sergey Torosyan, физическим лицом в Республике Армения, по адресу Tsarav Aghbyur 55/20.",
           "Платежи обрабатываются через Paddle — нашего платежного посредника. Paddle может администрировать платежные операции, налоги и процедуры оспаривания платежей в соответствии с правилами своей платформы.",
         ],
       },
@@ -113,6 +115,7 @@ const COPY: Record<SupportedLocale, RefundCopy> = {
       {
         heading: "1. Վճարումների միջնորդ",
         paragraphs: [
+          "doLegal-ը կառավարվում է Sergey Torosyan-ի կողմից, որը գործում է Հայաստանի Հանրապետությունում՝ Tsarav Aghbyur 55/20 հասցեում։",
           "Վճարումները մշակվում են Paddle-ի միջոցով՝ որպես մեր վճարումների միջնորդ։ Paddle-ը կարող է իրականացնել վճարային գործառնությունների, հարկերի և վճարումների բողոքարկման ընթացակարգերի կառավարումը՝ իր հարթակի կանոններին համապատասխան։",
         ],
       },

@@ -8,8 +8,8 @@ import { Masthead } from "../../_components/Masthead";
 import { Waitlist } from "../../_components/Waitlist";
 import { Footer } from "../../_components/Footer";
 import { FAQList } from "../_components/FAQList";
-import { ContactSalesForm } from "./_components/ContactSalesForm";
-import { PlansAndBilling } from "./_components/PlansAndBilling";
+import { ContactSalesForm } from "../pricing/_components/ContactSalesForm";
+import { PlansAndBilling } from "../pricing/_components/PlansAndBilling";
 
 export const metadata: Metadata = {
   title: "Pricing | doLegal Armenia",

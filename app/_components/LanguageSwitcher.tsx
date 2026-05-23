@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import {useLocale, useTranslations} from "next-intl";
 import {usePathname, useRouter} from "@/i18n/navigation";
+import {stripLocalePrefix} from "@/i18n/pathname";
 
 const LANGS = ["en", "ru", "am"] as const;
 type Lang = (typeof LANGS)[number];
@@ -50,9 +51,7 @@ export function LanguageSwitcher() {
             className={locale === l ? "active" : ""}
             onClick={() => {
               setOpen(false);
-              document.cookie = `NEXT_LOCALE=${l}; path=/; max-age=31536000; samesite=lax`;
-              router.replace(pathname, {locale: l});
-              router.refresh();
+              router.replace(stripLocalePrefix(pathname), {locale: l});
             }}
           >
             {l.toUpperCase()}

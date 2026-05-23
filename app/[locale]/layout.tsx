@@ -1,7 +1,18 @@
-import {hasLocale} from "next-intl";
+import type { Metadata } from "next";
+import {hasLocale, NextIntlClientProvider} from "next-intl";
+import {getMessages, setRequestLocale} from "next-intl/server";
 import {notFound} from "next/navigation";
-import {setRequestLocale} from "next-intl/server";
 import {routing} from "@/i18n/routing";
+
+export const metadata: Metadata = {
+  title: "doLegal — Legal AI-assistant for Armenia",
+  description:
+    "AI-powered legal research and drafting for Armenia. Grounded, cited, multilingual — built on official government legislation sources.",
+};
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({locale}));
+}
 
 export default async function LocaleLayout({
   children,
@@ -14,5 +25,21 @@ export default async function LocaleLayout({
   }
 
   setRequestLocale(locale);
-  return children;
+  const messages = await getMessages();
+
+  return (
+    <html
+      lang={locale}
+      data-theme="dark"
+      data-display="sans"
+      data-accent="cobalt"
+      suppressHydrationWarning
+    >
+      <body suppressHydrationWarning>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          {children}
+        </NextIntlClientProvider>
+      </body>
+    </html>
+  );
 }

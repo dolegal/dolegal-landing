@@ -24,7 +24,7 @@ const COPY: Record<SupportedLocale, TermsCopy> = {
       {
         heading: "1. Operator and acceptance",
         paragraphs: [
-          "These Terms are between you and [LEGAL ENTITY NAME] (doLegal, we, us, our), a company registered in the Republic of Armenia, with registered address at [REGISTERED ADDRESS].",
+          "These Terms are between you and Sergey Torosyan (doLegal, we, us, our), an individual operating in the Republic of Armenia, with address at Tsarav Aghbyur 55/20.",
           "By accessing or using doLegal, you agree to these Terms. If you use doLegal on behalf of an organization, you confirm you have authority to bind that organization.",
         ],
       },
@@ -136,7 +136,7 @@ const COPY: Record<SupportedLocale, TermsCopy> = {
       {
         heading: "1. Оператор и принятие условий",
         paragraphs: [
-          "Настоящие Условия заключаются между вами и [LEGAL ENTITY NAME] (doLegal, мы, нас, наш), компанией, зарегистрированной в Республике Армения, по адресу [REGISTERED ADDRESS].",
+          "Настоящие Условия заключаются между вами и Sergey Torosyan (doLegal, мы, нас, наш), физическим лицом, действующим в Республике Армения, по адресу Tsarav Aghbyur 55/20.",
           "Используя doLegal, вы соглашаетесь с этими Условиями. Если вы используете сервис от имени организации, вы подтверждаете полномочия связывать эту организацию данными Условиями.",
         ],
       },
@@ -248,7 +248,7 @@ const COPY: Record<SupportedLocale, TermsCopy> = {
       {
         heading: "1. Օպերատոր և պայմանների ընդունում",
         paragraphs: [
-          "Սույն պայմանները կնքվում են ձեր և [LEGAL ENTITY NAME]-ի (doLegal, մենք, մեզ, մեր) միջև, որը գրանցված է Հայաստանի Հանրապետությունում՝ [REGISTERED ADDRESS] հասցեում։",
+          "Սույն պայմանները կնքվում են ձեր և Sergey Torosyan-ի (doLegal, մենք, մեզ, մեր) միջև, որը գործում է Հայաստանի Հանրապետությունում՝ Tsarav Aghbyur 55/20 հասցեում։",
           "doLegal-ից օգտվելով՝ դուք համաձայնում եք սույն պայմաններին։ Եթե ծառայությունից օգտվում եք կազմակերպության անունից, հաստատում եք, որ լիազորված եք պարտավորեցնել այդ կազմակերպությանը։",
         ],
       },

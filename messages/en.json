@@ -887,8 +887,9 @@
       "faqSectionLabelExact": "Frequently asked",
       "faqTitleMainExact": "Common",
       "faqTitleAccentExact": "questions.",
-      "issueLastSynced": "Data last synced — 4 days ago",
-      "issueStats": "100,324 laws indexed · 3 languages · 17 codes"
+      "issueLastSynced": "Data last synced — {days, plural, =0 {today} one {# day ago} other {# days ago}}",
+      "corpusLastSynced": "CORPUS · last sync {days, plural, =0 {today} one {#d ago} other {#d ago}}",
+      "issueStats": "100,324 laws indexed · 3 languages · Complete Legal Corpus"
     },
     "pricingParity": {
       "monthly": "Monthly",

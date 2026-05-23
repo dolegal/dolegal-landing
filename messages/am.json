@@ -887,8 +887,9 @@
       "faqSectionLabelExact": "Հաճախ տրվողներ",
       "faqTitleMainExact": "Հաճախ տրվող",
       "faqTitleAccentExact": "հարցեր։",
-      "issueLastSynced": "Տվյալները թարմացվել են — 4 օր առաջ",
-      "issueStats": "100,324 օրենք ինդեքսավորված · 3 լեզու · 17 օրենսգիրք"
+      "issueLastSynced": "Տվյալները թարմացվել են — {days, plural, =0 {այսօր} one {# օր առաջ} other {# օր առաջ}}",
+      "corpusLastSynced": "CORPUS · թարմացում {days, plural, =0 {այսօր} one {# օր առաջ} other {# օր առաջ}}",
+      "issueStats": "100,324 օրենք ինդեքսավորված · 3 լեզու · Ամբողջական իրավական կորպուս"
     },
     "pricingParity": {
       "monthly": "Ամսական",

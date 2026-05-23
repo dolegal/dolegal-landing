@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import {useTranslations} from "next-intl";
 import {Link} from "@/i18n/navigation";
 import { brandText } from "@/lib/brand-text";
-import { IssueStrip } from "../_components/IssueStrip";
-import { Masthead } from "../_components/Masthead";
-import { Waitlist } from "../_components/Waitlist";
-import { FAQList } from "./_components/FAQList";
-import { LiveDemo } from "./_components/LiveDemo";
+import { IssueStrip } from "../../_components/IssueStrip";
+import { Masthead } from "../../_components/Masthead";
+import { Waitlist } from "../../_components/Waitlist";
+import { FAQList } from "../_components/FAQList";
+import { LiveDemo } from "../_components/LiveDemo";
 
 export const metadata: Metadata = {
   title: "doLegal | Armenian Legal AI Research and Drafting Platform",

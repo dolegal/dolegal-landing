@@ -3,6 +3,7 @@
 import {Link} from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import { brandText } from "@/lib/brand-text";
+import {getDataSyncDaysAgo} from "@/lib/data-sync-days";
 import {
   Fragment,
   KeyboardEvent as ReactKeyboardEvent,
@@ -131,6 +132,8 @@ interface Turn {
 /* ------------ component ------------ */
 
 export function ProductWorkspace() {
+  const tParity = useTranslations("landing.parity");
+  const syncDaysAgo = getDataSyncDaysAgo();
   const [activeTool, setActiveTool] = useState<(typeof TOOLS)[number]["id"]>(
     "research",
   );
@@ -259,9 +262,9 @@ export function ProductWorkspace() {
             borderTop: "1px solid var(--rule-soft)",
           }}
         >
-          CORPUS · last sync 4d ago
+          {tParity("corpusLastSynced", {days: syncDaysAgo})}
           <br />
-          100,324 indexed · 17 codes
+          {tParity("issueStats")}
         </div>
       </aside>
 
