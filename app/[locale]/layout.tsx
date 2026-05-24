@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import {hasLocale, NextIntlClientProvider} from "next-intl";
 import {getMessages, setRequestLocale} from "next-intl/server";
+import {headers} from "next/headers";
 import {notFound} from "next/navigation";
 import {routing} from "@/i18n/routing";
+import {themeAttrsFromPathname} from "@/lib/theme-from-path";
 
 export const metadata: Metadata = {
   title: "doLegal — Legal AI-assistant for Armenia",
@@ -26,13 +28,15 @@ export default async function LocaleLayout({
 
   setRequestLocale(locale);
   const messages = await getMessages();
+  const pathname = (await headers()).get("x-pathname") ?? "";
+  const themeAttrs = themeAttrsFromPathname(pathname);
 
   return (
     <html
       lang={locale}
-      data-theme="dark"
-      data-display="sans"
-      data-accent="cobalt"
+      data-theme={themeAttrs.theme}
+      data-display={themeAttrs.display}
+      data-accent={themeAttrs.accent}
       suppressHydrationWarning
     >
       <body suppressHydrationWarning>
